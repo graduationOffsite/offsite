@@ -60,7 +60,7 @@ import { PlayerService } from './components/services/player/player.service';
     EditComponent,
     DeleteComponent,
     BookingComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
   ],
   imports: [
     BrowserModule,

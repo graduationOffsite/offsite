@@ -1,5 +1,6 @@
- <div class="container">  
-     <form #playerForm='ngForm' novalidate (ngSubmit)="loginPlayer()">
+<div class="container-fluid" id="logP">
+  <div class="row" id="logStyle" > 
+     <form #playerForm='ngForm' novalidate (ngSubmit)="loginPlayer()" class="container mx-auto col-6 py-5" style="background-color: rgba(240, 255, 255, 0.397); top:100px; ">
       <h1 *ngIf='isRegistered' class="row text-success">{{Div}}</h1>
       <h1 *ngIf='isErrAuth' class="row text-danger">{{authDiv}}</h1>
 
@@ -17,3 +18,5 @@
          <h4 *ngIf='isErr' class="row text-danger">{{errDiv}}</h4>
      
     </form> 
+    </div>
+</div>
