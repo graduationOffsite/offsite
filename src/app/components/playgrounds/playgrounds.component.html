@@ -1,11 +1,25 @@
-<section class="container mt-4">
-    <div class="row justify-content-center">
-      <div class="col-md-12 text-center">
-        <h2>FIND YOUR PLAY</h2>
-        <h5>
-            Find football pitches in a range of cities across Qena
-            Choose a city to get started
-        </h5>
+<div class="container-fluid">
+    <div class="">
+    <div class="">
+        <div class="row upper">
+            <div class="col-6-lg col-md-12 col-sm-12 justify-content-center">
+                <h1 class="upper_content mt-5 text-center text-wrap d-sm-none d-md-inline">football <br> playgrounds</h1>
+            </div>
+            <div class="col-6-lg col-md-12 col-sm-12">
+                <img src="../../../assets/images/ball.png" class="img-responsive">
+            </div>
+        
+        </div>
+        <section>
+            <div class="content justify-content-center">
+                <h2 class="text-wrap text-center">FIND YOUR Playground</h2>
+                <h5>
+                    Find football pitches in a range of cities across Egypt
+                    Choose a city to get started
+                </h5>
+            </div>
+        </section>
+        <div class="container mx-auto">
         <div class="row mt-5 justify-content-center">
             <div class="col-lg-3 col-sm-12"> <i class="text-success fas fa-search"></i>
                 <select class="p-1 mb-3 text-dark ml-3 border border-success rounded">
@@ -47,34 +61,35 @@
         </div>      
       </div>   		
     </div>
-
-    <div class="container">
+    </div>
+    <div class="container mt-4 mx-auto">
          
       <div class="row pb-3" 
-      *ngFor="let playground of playgrounds; let i = index" >
-        <div class="col-sm-12 col-lg-6 pb-3">
-            <div class="card p-3">
-                <div class="row">
-                    <div class="col-lg-5">
-                        <img class="card-img" style="height: 100%;" src="{{playground.imagePath}}" alt="Playground image">
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="card-body mt-lg-n4">
-                            <h4 class="card-text"><i class="far fa-flag text-success"></i>{{playground.name}}</h4>
-                            <h5 class="card-text">{{playground.location}}<i class="fas fa-map-marker-alt float-right"></i></h5>
-                            <div class="clearfix align-bottom"> 
+       >
+        <div class="col-sm-12 col-lg-6 pb-3 pl-4" *ngFor="let playground of playgrounds; let i = index">
+            <div class="container">
+                <div class="card p-3">
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <img class="card-img" style="height: 100%;" src="{{playground.imagePath}}" alt="Playground image">
+                            <div class="clearfix align-bottom" id="popup"> 
                                 <button class="btn btn-outline-success float-left mt-2" (click)="onSelect(playground)">book online <i class="fas fa-bolt text-warning"></i> </button>
-                                <h5 class="float-right mt-2"> {{playground.price}} <i class="fas fa-pound-sign"> /hr</i></h5>
-                                
                             </div>
-                            <small>21 evening bookings available this week</small>
+                        </div>
+                        <div class="col-lg-7 p-4">
+                            <div class="card-body mt-lg-n4">
+                                <h4 class="card-text pb-3"><i class="far fa-flag text-success"></i>{{playground.name}}</h4>
+                                <h5 class="card-text pb-3">{{playground.location}}<i class="fas fa-map-marker-alt float-right"></i></h5>
+                                <h5 class="card-text mt-2"> {{playground.price}}<i class="float-right fas fa-pound-sign"> /hr</i></h5>
+                                <small class="pb-3">21 evening bookings available this week</small>
 
-                          </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    
                 
-               
-              </div>
+                </div>
+            </div>
         </div>
           
       </div>
@@ -90,4 +105,4 @@
         <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
       </ul>
      
-</section>
+    </div>

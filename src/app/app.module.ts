@@ -37,6 +37,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component'
+import { PlayerService } from './components/services/player/player.service';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    PlayerService
   ],
   bootstrap: [AppComponent]
 })

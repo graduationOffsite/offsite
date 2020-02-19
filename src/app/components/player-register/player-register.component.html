@@ -1,44 +1,36 @@
 <div class="container">
-    <form  >
+    <form #playerForm='ngForm' novalidate (ngSubmit)="onSubmit()">
          <div class="form-group">
           <label>Name :</label>
-          <input type="text" class="form-control" >
+          <input type="text" class="form-control" [class.is-invalid]="name.invalid && name.touched"
+          #name="ngModel" required [(ngModel)]="playerModel.playerName" name="playerName">
          </div>
-         <div class="form-group">
-            <label>E-mail :</label>
-            <input type="text" class="form-control" >
-           </div>
-           <div class="form-group">
-            <label>Location :</label>
-            <input type="text" class="form-control" >
-           </div>
             <div class="form-group">
             <label>Phone :</label>
-            <input type="text" class="form-control" >
+            <!-- pattern="^0[1-6]{1}(([0-9]{2}){4})|((\s[0-9]{2}){4})|((-[0-9]{2}){4})$"  -->
+            <input type="text" class="form-control" [class.is-invalid]="phone.invalid && phone.touched"
+            #phone="ngModel" required [(ngModel)]="playerModel.playerPhone" name="playerPhone" >
            </div> 
            <div class="form-group">
+            <label>Location :</label>
+            <input type="text" class="form-control" [class.is-invalid]="location.invalid && location.touched"
+            #location="ngModel" required [(ngModel)]="playerModel.location" name="location">
+           </div>
+           <div class="form-group">
             <label>Password :</label>
-            <input type="password" class="form-control" >
+            <input type="password" class="form-control" [class.is-invalid]="password.invalid && password.touched"
+            #password="ngModel" required [(ngModel)]="playerModel.password" name="password" >
           </div>
          <div class="form-group">
-           <label>Confirm  Password :</label>
-           <input type="password" class="form-control" >
+           <label>repeat your password again:</label>
+           <input type="password" class="form-control" [class.is-invalid]="password2.invalid && password2.touched"
+           #password2="ngModel" required [(ngModel)]="playerModel.repeatPassword" name="repeatPassword" >
          </div>
-            <input type="submit" [disabled]="userForm.form.invalid" class="btn btn-primary" value="Register">
+            <input type="submit" [disabled]="playerForm.form.invalid" class="btn btn-success" value="Register">
+         <div *ngIf="err" class="row text-danger">{{Div}} </div>
     </form>            
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
    
        
- 
+   

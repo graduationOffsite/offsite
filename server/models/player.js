@@ -3,22 +3,39 @@ const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
 const player=new Schema({ 
-    phone:{
+    name:{
         type:String,
-        required:true
+        required:true,
+        unique:true
+    }
+    ,phone:{
+        type:String,
+        required:true,
+        unique:true
     },
      password:{
         type:String,
         required:true
     },
+    location:{
+        type:String
+        ,required:true
+    }
+    ,
     cart:{
-         items:[
-             {
-                 productId:{type:Schema.Types.ObjectId,ref:'Playground',required:true},
-                 quantity:{type:Number,required:true} 
-                  
-             }
-         ] 
+        bookingIds: [{
+                type:Schema.Types.ObjectId,
+                ref:'booking'
+            }] ,
+        totalPrice:{
+            type:Number
+        } 
+         /* ,
+         quantity:{
+            type:Number,
+            required:true,
+            defult:1
+        } */
     }
 
 });

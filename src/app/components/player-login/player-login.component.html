@@ -1,0 +1,19 @@
+ <div class="container">  
+     <form #playerForm='ngForm' novalidate (ngSubmit)="loginPlayer()">
+      <h1 *ngIf='isRegistered' class="row text-success">{{Div}}</h1>
+      <h1 *ngIf='isErrAuth' class="row text-danger">{{authDiv}}</h1>
+
+      <div class="form-group">
+        <label>Phone :</label>
+        <input type="text" class="form-control" [class.is-invalid]="phone.invalid && phone.touched"
+        #phone="ngModel" required [(ngModel)]="playerModel.playerPhone" name="playerPhone">
+       </div> 
+       <div class="form-group">
+        <label>Password :</label>
+        <input type="password" class="form-control" [class.is-invalid]="password.invalid && password.touched"
+        #password="ngModel" required [(ngModel)]="playerModel.password" name="password" >
+      </div>
+         <input type="submit" [disabled]="playerForm.form.invalid" class="btn btn-primary" value="Log In">
+         <h4 *ngIf='isErr' class="row text-danger">{{errDiv}}</h4>
+     
+    </form> 
