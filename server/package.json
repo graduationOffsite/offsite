@@ -1,0 +1,20 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "graduation project MEAN Stack ITI Qena ",
+  "main": "app.js",
+  "scripts": {
+    "test": "test test"
+  },
+  "author": "Amira, Ibrahim, Salsabeel and Wafaa team",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.8",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.11",
+    "mongoose-unique-validator": "^2.0.3",
+    "multer": "^1.4.2"
+  }
+}

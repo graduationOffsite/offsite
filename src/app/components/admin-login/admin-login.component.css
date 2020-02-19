@@ -1,0 +1,16 @@
+main {
+    margin-top:1rem;
+    width: 50%;
+    margin: 1rem auto;
+  }
+   
+mat-form-field {
+  width: 100%;
+}
+button{
+    color:blue;
+}
+
+mat-spinner {
+  margin: auto;
+}

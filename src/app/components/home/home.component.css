@@ -1,0 +1,23 @@
+.jumbotron {
+    background-image: url("../../../assets/images/slide1.jpg");
+    background-size: cover;
+    height:580px;
+    color: darkgrey;
+    
+  }
+
+  .imgedit{
+ 
+ height:100%;
+ width:100% 
+  }
+  .fontsize{
+
+    font-size:x-large
+  }
+
+
+
+
+
+    

@@ -1,0 +1,93 @@
+<section class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-12 text-center">
+        <h2>FIND YOUR PLAY</h2>
+        <h5>
+            Find football pitches in a range of cities across Qena
+            Choose a city to get started
+        </h5>
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-3 col-sm-12"> <i class="text-success fas fa-search"></i>
+                <select class="p-1 mb-3 text-dark ml-3 border border-success rounded">
+                    <option class="bg-success ">select a loaction <i class="fas fa-map-marker-alt"></i></option>
+                    <option class="bg-success ">location 1</option>
+                    <option class="bg-success ">location 2</option>
+                    <option class="bg-success ">location 3</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <button type="button" class="mb-4 float-lg-left mt-sm-3 mt-lg-n1 btn btn-outline-success" data-toggle="collapse" data-target="#filters">Advanced search <i class="fas fa-stream"></i></button>
+                </div>
+        </div>
+        <div class="row justify-content-center collapse" id="filters">
+            <div class="col-lg-3 col-sm-12 mt-1"><i class="text-success fas fa-calendar-alt"></i>
+                    <input class=" ml-3 border border-success rounded col-lg-8 col-sm-4" type="date" value="2020-08-19" id="date-input">
+            </div>
+            <div class="col-lg-5 col-sm-12 mt-1">
+                <i class="fas fa-pound-sign text-success"> /hr</i>
+                <div class="form-check-inline ml-3">
+                    <label class="">
+                      <input type="checkbox" class="form-check-input" value="">50+ 
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                <label class="">
+                    <input type="checkbox" class="form-check-input" value="">50-100
+                </label>
+                </div>
+                <div class="form-check-inline">
+                <label class="">
+                    <input type="checkbox" class="form-check-input" value="">100-150 
+                </label>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12">
+            <button type="button" class="mb-4 float-lg-left btn btn-outline-success">Search</button>
+            </div>
+        </div>      
+      </div>   		
+    </div>
+
+    <div class="container">
+         
+      <div class="row pb-3" 
+      *ngFor="let playground of playgrounds; let i = index" >
+        <div class="col-sm-12 col-lg-6 pb-3">
+            <div class="card p-3">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <img class="card-img" style="height: 100%;" src="{{playground.imagePath}}" alt="Playground image">
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="card-body mt-lg-n4">
+                            <h4 class="card-text"><i class="far fa-flag text-success"></i>{{playground.name}}</h4>
+                            <h5 class="card-text">{{playground.location}}<i class="fas fa-map-marker-alt float-right"></i></h5>
+                            <div class="clearfix align-bottom"> 
+                                <button class="btn btn-outline-success float-left mt-2" (click)="onSelect(playground)">book online <i class="fas fa-bolt text-warning"></i> </button>
+                                <h5 class="float-right mt-2"> {{playground.price}} <i class="fas fa-pound-sign"> /hr</i></h5>
+                                
+                            </div>
+                            <small>21 evening bookings available this week</small>
+
+                          </div>
+                    </div>
+                </div>
+                
+               
+              </div>
+        </div>
+          
+      </div>
+    </div>
+
+
+    <!-- pagenation -->
+    <ul class="pagination justify-content-center my-4 ">
+        <li class="page-item"><a class="page-link text-success" href="#">Previous</a></li>
+        <li class="page-item "><a class="page-link text-success" href="#">1</a></li>
+        <li class="page-item "><a class="page-link text-success" href="#">2</a></li>
+        <li class="page-item"><a class="page-link text-success" href="#">3</a></li>
+        <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
+      </ul>
+     
+</section>
