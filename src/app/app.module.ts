@@ -36,7 +36,7 @@ import { AddTimeComponent } from './components/add-time/add-time.component';
 import { EditComponent } from './components/edit/edit.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { BookingComponent } from './components/booking/booking.component';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component'
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     EditComponent,
     DeleteComponent,
     BookingComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
   ],
   imports: [
     BrowserModule,

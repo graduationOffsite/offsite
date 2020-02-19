@@ -8,6 +8,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink='/playgrounds'>Playgrounds</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/adminDashboard'>Admin dashbord</a>
       </li> 
       <li class="nav-item" *ngIf="userIsAuthenticated">
         <a class="nav-link" routerLink='/createPlayground'>create playground </a>
@@ -18,11 +21,19 @@
 
     <ul class="navbar-nav">
      
-      <li class="nav-item" *ngIf="!userIsAuthenticated" >
-        <a class="nav-link" routerLink='/register'>Register</a>
+      <li class="nav-item dropdown" *ngIf="!userIsAuthenticated" >
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
+        <div class="dropdown-content">
+            <a class="dropdown-item" routerLink='/admin-register'>Admin Register</a>
+            <a class="dropdown-item" routerLink='/player-register'>Player Register</a>
+          </div>
       </li>
-      <li class="nav-item" *ngIf="!userIsAuthenticated">
-        <a class="nav-link" routerLink='/login'>LogIn</a>
+      <li class="nav-item dropdown" *ngIf="!userIsAuthenticated">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown">LogIn</a>
+        <div class="dropdown-content">
+            <a class="dropdown-item" routerLink='/admin-login'>Admin LogIn</a>
+            <a class="dropdown-item" routerLink='/player-login'>Player LogIn</a>
+          </div>
       </li>
       <li class="nav-item" *ngIf="userIsAuthenticated">
         <button class="nav-link btn btn-sucess" (click)="onLogout()" >LogOut</button>
