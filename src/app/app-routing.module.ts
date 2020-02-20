@@ -13,6 +13,10 @@ import { PlaygroundCreateComponent } from './components/playground-create/playgr
 import { AuthGuard } from "src/app/components/auth.guard" 
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { BookingComponent } from './components/booking/booking.component';
+import { DeleteComponent } from './components/delete/delete.component';
+import { EditComponent } from './components/edit/edit.component';
+import { AddTimeComponent } from './components/add-time/add-time.component';
 
 
 const routes: Routes = [
@@ -26,6 +30,10 @@ const routes: Routes = [
   {path:'admin-register',component:AdminRegisterComponent},
   {path:'player-login',component:PlayerLoginComponent},
   {path:'admin-login',component:AdminLoginComponent},
+  {path:'booking',component:BookingComponent},
+  {path:'delete',component:DeleteComponent},
+  {path:'edit',component:EditComponent},
+  {path:'addTime',component:AddTimeComponent},
   {path:'createPlayground',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
   {path:'**',component:PagenotfoundComponent}
   
@@ -37,3 +45,4 @@ const routes: Routes = [
   providers:[AuthGuard]
 })
 export class AppRoutingModule { }
+ 
