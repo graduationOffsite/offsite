@@ -9,15 +9,15 @@ import { playerSignup } from './playerSginup.model';
 export class PlayerService {
 
   constructor(private http:HttpClient) { }
-
+  public authorized:boolean=!!localStorage.getItem('playerToken');
   public registered:boolean = false
-  public authorized:boolean = !!localStorage.getItem('playerToken')
+  // public isLoginGetName=!!localStorage.getItem('playerToken');
   public signupPlayer(player: playerSignup){
     
     return this.http.post('http://localhost:3000/player/signup',player);
   }
   public loginPlayer(player:playerLogin){
-    this.authorized=true
+    // this.authorized=true
     return this.http.post('http://localhost:3000/player/login',player)
     }
     public auth(){

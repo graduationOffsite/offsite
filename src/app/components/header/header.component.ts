@@ -17,8 +17,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
     if(this.playerService.authorized){
     this.playerService.getPlayerName().subscribe(response=>{
     this.playerName=response as string
+    // this.playerService.isLoginGetName=true
     })
-  }}
+    
+  }
+
+}
 
   ngOnInit() {  
     this.userIsAuthenticated = this.authService.getIsAuth();
