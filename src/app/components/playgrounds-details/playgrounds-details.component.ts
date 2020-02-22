@@ -31,8 +31,8 @@ export class PlaygroundsDetailsComponent implements OnInit {
      this.playgroundServ.getDetails(this.code).subscribe(data=>{
       this.isLoading=false;
       this.playground=data 
-      console.log(this.playground);
-      console.log(typeof(this.playground))
+      // console.log(this.playground);
+      // console.log(typeof(this.playground))
     })
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from "rxjs";
 
 import { AdminSrviceService } from "../services/admin-srvice.service";
+import { PlayerService } from '../services/player/player.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,13 @@ import { AdminSrviceService } from "../services/admin-srvice.service";
 export class HeaderComponent implements OnInit,OnDestroy {
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
-  constructor(private authService:AdminSrviceService) { }
+  public playerName;
+  constructor(private authService:AdminSrviceService,private playerService:PlayerService) { 
+    if(this.playerService.authorized){
+    this.playerService.getPlayerName().subscribe(response=>{
+    this.playerName=response as string
+    })
+  }}
 
   ngOnInit() {  
     this.userIsAuthenticated = this.authService.getIsAuth();
@@ -27,6 +34,11 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   }
 
+   
+  public playerLogOut(){
+    localStorage.removeItem('playerToken')
+    this.playerService.authorized = false;
+  }
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
   }

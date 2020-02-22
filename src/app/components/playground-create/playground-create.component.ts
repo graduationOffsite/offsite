@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'; 
 import { NgForm,FormGroup,FormControl, Validators } from '@angular/forms';
 import { PlaygroundsService } from '../services/playgrounds.service'
-import { Router } from '@angular/router'; 
+import { ActivatedRoute, ParamMap } from "@angular/router";
 import { mimeType } from '../mime-type.validator'
+import { Playground } from '../playground.model';
 
 
 @Component({
@@ -11,11 +12,14 @@ import { mimeType } from '../mime-type.validator'
   styleUrls: ['./playground-create.component.css']
 })
 export class PlaygroundCreateComponent implements OnInit {
-  enterdPlayName='';
-  enterdPlayDesc='';
-  enterdPlayOwner='';
-  enterdPlayPrice;
-  enterdPlayPhone='';
+  private mode = "create";
+  private playgroundId: string;
+  playground:Playground;
+  // enterdPlayName='';
+  // enterdPlayDesc='';
+  // enterdPlayOwner='';
+  // enterdPlayPrice;
+  // enterdPlayPhone='';
   selectedPmHours;
   selectedAmHours;
   selectedLocation='';
@@ -27,28 +31,40 @@ export class PlaygroundCreateComponent implements OnInit {
   locations=['qena','cairo','aswan','banha'];
 
   
-  constructor(public playgroundServ:PlaygroundsService,private router: Router) { }
+  constructor(public playgroundServ:PlaygroundsService,public route:ActivatedRoute) { }
 //form:NgForm
   onAddPlayground(){
     if(this.form.invalid){
       return;
+    }
+    if (this.mode === "create"){
+      this.playgroundServ.addPlayground( 
+        this.form.value.playgroundName,
+        this.form.value.description,
+        this.form.value.playgroundOwner,
+        this.form.value.playgroundPrice,
+        this.form.value.playgroundPhone,
+        this.form.value.playgroundPm,
+        this.form.value.playgroundAm,
+        this.form.value.playgroundLocation,
+        this.form.value.image
+    
+        )
+    }else{
+       this.playgroundServ.updatePlayground(
+        this.playgroundId,
+        this.form.value.playgroundName,
+        this.form.value.description,
+        this.form.value.playgroundOwner,
+        this.form.value.playgroundPrice,
+        this.form.value.playgroundPhone,
+        this.form.value.playgroundPm,
+        this.form.value.playgroundAm,
+        this.form.value.playgroundLocation,
+        this.form.value.image 
+       )
     }  
-  this.playgroundServ.addPlayground(
-    this.enterdPlayName,
-    this.enterdPlayDesc,
-    this.enterdPlayOwner,
-    this.enterdPlayPrice,
-    this.enterdPlayPhone,
-    this.selectedPmHours,
-    this.selectedAmHours,
-    this.selectedLocation,
-    this.form.value.image
-
-    )
-    console.log(this.selectedLocation)
-    this.form.reset();
-    this.router.navigate(['/']);
-
+    this.form.reset(); 
   }
  
    
@@ -66,13 +82,12 @@ export class PlaygroundCreateComponent implements OnInit {
       resolve(reader.result)
       }
     })
-    console.log(this.imagePreview) 
-    console.log(file); 
+ 
   }
   // console.log(this.imagePreview );
 
 
-  ngOnInit() {
+  ngOnInit() { 
     this.form = new FormGroup({
       playgroundName: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
@@ -104,6 +119,33 @@ export class PlaygroundCreateComponent implements OnInit {
       }) 
 
     })
+    
+    this.route.paramMap.subscribe((paramMap: ParamMap)=>{
+      if (paramMap.has("playgroundId")){
+        this.mode='edit';
+        this.playgroundId = paramMap.get("playgroundId");
+        this.playgroundServ.getDetails(this.playgroundId).subscribe(postData => {
+           
+          this.playground=postData;
+          this.form.setValue({
+            playgroundName: this.playground.name,
+            image: this.playground.imagePath,
+            playgroundOwner: this.playground.owner,
+            playgroundPrice: this.playground.price,
+            playgroundPhone: this.playground.phone,
+            playgroundAm: this.playground.amHours,
+            playgroundPm: this.playground.pmHours,
+            playgroundLocation: this.playground.location,
+            description: this.playground.description 
+          });
+        });
+      }else{
+        this.mode = "create";
+        this.playgroundId = null;
+      }
+
+    })
+
   }
 
 }

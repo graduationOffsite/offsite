@@ -10,7 +10,8 @@ import {
   MatToolbarModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
-  MatSelectModule
+  MatSelectModule,
+  MatPaginatorModule
 } from "@angular/material";
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -36,7 +37,8 @@ import { AddTimeComponent } from './components/add-time/add-time.component';
 import { EditComponent } from './components/edit/edit.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { BookingComponent } from './components/booking/booking.component';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component'
+import { PlayerService } from './components/services/player/player.service';
 
 @NgModule({
   declarations: [
@@ -75,11 +77,13 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     MatToolbarModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule
     
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    PlayerService
   ],
   bootstrap: [AppComponent]
 })

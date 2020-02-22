@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { Subject } from "rxjs";
+import { Subject, Observable } from "rxjs";
 
 import { AdminData } from "../admin-data.model";
 
@@ -38,6 +38,12 @@ export class AdminSrviceService {
       this.router.navigate(["/admin-login"]);
 
   }
+
+  showOwnerPlayground():Observable<any>{
+    return this.http.get<any>("http://localhost:3000/playgrounds/ownerPlayground");
+  }
+
+   
 
   
   login(phone: string, password: string){

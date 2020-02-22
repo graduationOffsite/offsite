@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminSrviceService } from '../services/admin-srvice.service';
 
 @Component({
   selector: 'app-delete',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delete.component.css']
 })
 export class DeleteComponent implements OnInit {
+  reservations;
 
-  constructor() { }
+  constructor(public adminServ :AdminSrviceService) { }
 
   ngOnInit() {
   }

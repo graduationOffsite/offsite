@@ -6,8 +6,7 @@
              matInput 
              type="text"
              name="playgroundName"
-             formControlName='playgroundName' 
-             [(ngModel)]="enterdPlayName"  
+             formControlName='playgroundName'  
              placeholder="playground Name"
               >
             <mat-error *ngIf="form.get('playgroundName').invalid">Please enter a playground name.</mat-error> 
@@ -24,8 +23,7 @@
              matInput 
              type="text"
              name="playgroundOwner"
-             formControlName='playgroundOwner'  
-             [(ngModel)]="enterdPlayOwner" 
+             formControlName='playgroundOwner' 
              placeholder="playground Owner"
               >
             <mat-error *ngIf="form.get('playgroundOwner').invalid">Please enter a playground owner.</mat-error> 
@@ -35,8 +33,7 @@
              matInput 
              type="number"
              name="playgroundPrice"
-             formControlName='playgroundPrice'  
-             [(ngModel)]="enterdPlayPrice" 
+             formControlName='playgroundPrice' 
              placeholder="playground Price" >
             <mat-error *ngIf="form.get('playgroundPrice').invalid">Please enter a playground Price.</mat-error> 
          </mat-form-field>
@@ -46,8 +43,7 @@
              type="text"
              pattern="^01[0-2]{1}[0-9]{8}"
              name="playgroundPhone"
-             formControlName='playgroundPhone'  
-             [(ngModel)]="enterdPlayPhone" 
+             formControlName='playgroundPhone' 
              placeholder="playground Phone"
               >
             <mat-error *ngIf="form.get('playgroundPhone').invalid">Please enter a playground Phone.</mat-error> 
@@ -83,8 +79,7 @@
              matInput 
              rows="4"
              name="description"
-             formControlName='description'  
-             [(ngModel)]="enterdPlayDesc"  
+             formControlName='description'   
              placeholder="playground Description"
              
             >

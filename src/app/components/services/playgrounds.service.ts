@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Subject, Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 import { Playground } from '../playground.model';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -10,18 +11,22 @@ import { Playground } from '../playground.model';
 })
 export class PlaygroundsService {
   private playgrounds:Playground[] = [];
-  private playgroundsUpdated = new Subject<Playground[]>();
+  private playgroundsUpdated = new Subject<{playgrounds:Playground[], playgroundCount: number }>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  getPlaygrounds(){
+  getPlaygrounds(playgroundPerPage: number, currentPage: number){
+    const queryParams = `?pagesize=${playgroundPerPage}&page=${currentPage}`;
     this.http
-    .get<{ message: string; playgrounds: any }>(
-      "http://localhost:3000/playgrounds/getPlaygrounds"
+    .get<{ message: string; playgrounds: any;
+      maxPlaygrounds: number  }>(
+      "http://localhost:3000/playgrounds/getPlaygrounds" + queryParams
     )
-    .pipe(map((playgroundData) => {
-      return playgroundData.playgrounds.map(playground => {
-        return {
+    .pipe(
+      map((playgroundData) => {
+      return{ 
+        playgrounds: playgroundData.playgrounds.map(playground => {
+          return {
           id: playground._id, 
           name: playground.name,
           description: playground.description,
@@ -34,12 +39,17 @@ export class PlaygroundsService {
           imagePath:playground.imagePath,
           ownerId:playground.ownerId
  
-        };
-      });
+         };
+       }),
+       maxPlaygrounds: playgroundData.maxPlaygrounds 
+    } 
     }))
     .subscribe(comingplaygrounds => {
-      this.playgrounds = comingplaygrounds;
-      this.playgroundsUpdated.next([...this.playgrounds]);
+      this.playgrounds = comingplaygrounds.playgrounds;
+      this.playgroundsUpdated.next({
+        playgrounds:[...this.playgrounds],
+        playgroundCount:comingplaygrounds.maxPlaygrounds
+      });
     });
   }
 
@@ -52,7 +62,7 @@ export class PlaygroundsService {
   }
 
     
-  addPlayground(
+addPlayground(
     name:string,
     description:string,
     owner:string,
@@ -76,22 +86,59 @@ export class PlaygroundsService {
     .post<{ message: string, playground:Playground }>
     ("http://localhost:3000/playgrounds/postPlay", playgroundData)
     .subscribe(responseData =>{
-      console.log(responseData.message);
-      const playground={id:responseData.playground.id,
-        name:name,
-        description:description,
-        owner:owner,
-        price:price,
-        phone:phone,
-        pmHours:pmHours,
-        amHours:amHours,
-        location:location,
-        imagePath:responseData.playground.imagePath 
-      } 
-      this.playgrounds.push(playground);
-      this.playgroundsUpdated.next([...this.playgrounds])  
+      // this.router.navigate(["/"]); 
     })  
-    
-
   }
+
+  updatePlayground(
+    id: string,
+    name:string,
+    description:string,
+    owner:string,
+    price:number,
+    phone:string,
+    pmHours:[],
+    amHours:[],
+    location:string,
+    image:any){
+      let playgroundData;
+      console.log(typeof(image))
+      if (typeof(image) === "object") {
+         playgroundData=new FormData();
+        playgroundData.append('id',id); 
+        playgroundData.append('name',name);
+        playgroundData.append('description',description); 
+        playgroundData.append('owner',owner); 
+        playgroundData.append('price',JSON.stringify(price)); 
+        playgroundData.append('phone',phone);
+        playgroundData.append('pmHours',JSON.stringify(pmHours));
+        playgroundData.append('amHours',JSON.stringify(amHours));
+        playgroundData.append('location',location);
+        playgroundData.append('image',image,name); 
+      }
+       else{
+       playgroundData={
+          id:id,
+          name:name,
+          description:description,
+          owner:owner,
+          price:price,
+          phone:phone,
+          pmHours:pmHours,
+          amHours:amHours,
+          location:location,
+          imagePath:image
+        }
+      }
+      this.http
+      .put("http://localhost:3000/playgrounds/" + id, playgroundData)
+      .subscribe(response => {
+        // this.router.navigate(["/"]);
+      });
+       
+  }
+
 }
+
+  
+ 

@@ -1,28 +1,36 @@
 <div class="container-fluid" id="regP">
-  <form class="container mx-auto col-6 py-5" style="background-color: rgba(240, 255, 255, 0.596); top:50px" >
-       <div class="form-group">
-        <label><strong>Name :</strong></label>
-        <input type="text" class="form-control" >
-       </div>
-       <div class="form-group">
-          <label><strong>E-mail :</strong></label>
-          <input type="text" class="form-control" >
-         </div>
+    <form #playerForm='ngForm' novalidate (ngSubmit)="onSubmit()" class="container mx-auto col-6 py-5" style="background-color: rgba(240, 255, 255, 0.596); top:50px">
          <div class="form-group">
-          <label><strong>Location :</strong></label>
-          <input type="text" class="form-control" >
+          <label>Name :</label>
+          <input type="text" class="form-control" [class.is-invalid]="name.invalid && name.touched"
+          #name="ngModel" required [(ngModel)]="playerModel.playerName" name="playerName">
          </div>
-          <div class="form-group">
-          <label><strong>Phone :</strong></label>
-          <input type="text" class="form-control" >
-         </div> 
+            <div class="form-group">
+            <label>Phone :</label>
+            <input type="text" class="form-control" [class.is-invalid]="phone.invalid && phone.touched"
+            #phone="ngModel" required [(ngModel)]="playerModel.playerPhone" name="playerPhone"
+            pattern="^01[0-2]{1}[0-9]{8}" >
+           </div> 
+           <div class="form-group">
+            <label>Location :</label>
+            <input type="text" class="form-control" [class.is-invalid]="location.invalid && location.touched"
+            #location="ngModel" required [(ngModel)]="playerModel.location" name="location">
+           </div>
+           <div class="form-group">
+            <label>Password :</label>
+            <input type="password" class="form-control" [class.is-invalid]="password.invalid && password.touched"
+            #password="ngModel" required [(ngModel)]="playerModel.password" name="password" >
+          </div>
          <div class="form-group">
-          <label><strong>Password :</strong></label>
-          <input type="password" class="form-control" >
-        </div>
-       <div class="form-group">
-         <label><strong>Confirm  Password :</strong></label>
-         <input type="password" class="form-control" >
-       </div>
-          <input type="submit" [disabled]="userForm.form.invalid" class="btn btn-primary" value="Register">
-  </form>           
+           <label>repeat your password again:</label>
+           <input type="password" class="form-control" [class.is-invalid]="password2.invalid && password2.touched"
+           #password2="ngModel" required [(ngModel)]="playerModel.repeatPassword" name="repeatPassword" >
+         </div>
+            <input type="submit" [disabled]="playerForm.form.invalid" class="btn btn-success" value="Register">
+         <div *ngIf="err" class="row text-danger">{{Div}} </div>
+    </form>            
+   
+
+   
+       
+   
