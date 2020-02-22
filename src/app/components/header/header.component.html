@@ -20,9 +20,12 @@
       <li class="nav-item">
         <a class="nav-link" routerLink='/adminDashboard' *ngIf="userIsAuthenticated">Admin Dashboard</a>
       </li>
+<<<<<<< HEAD
       <li class="nav-item" *ngIf="userIsAuthenticated">
         <a class="nav-link btn btn-sucess" routerLink='/edit' >My Playground</a>
       </li>
+=======
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
     </ul>
 
     <span class="rightside"></span>
@@ -46,8 +49,13 @@
       <li class="nav-item" *ngIf="userIsAuthenticated">
         <button class="nav-link btn btn-sucess" (click)="onLogout()" >LogOut</button>
       </li>
+<<<<<<< HEAD
       <li class="nav-item dropdown" *ngIf="playerService.authorized" >
         <a class="nav-link playerOptions" data-toggle="dropdown" style="color: yellowgreen;">Hi {{playerName}} <h5 class="ml-1 text-dark far fa-user-circle"></h5></a>
+=======
+      <li class="nav-item dropdown" *ngIf="playerService.authorized">
+        <a class="nav-link playerOptions"  data-toggle="dropdown" style="color: yellowgreen;">Hi {{playerName}} <h5 class="ml-1 text-dark far fa-user-circle"></h5></a>
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
           <div class="dropdown-menu mt-2">
             <a class="dropdown-item">My bookings</a>
             <div class="dropdown-divider"></div>

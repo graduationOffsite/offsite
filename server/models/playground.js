@@ -2,7 +2,11 @@ const uniqueValidator = require("mongoose-unique-validator");
 const mongoose = require("mongoose");
 
 const playgroundSchema = mongoose.Schema({
+<<<<<<< HEAD
     name: { type: String, required: true},
+=======
+    name: { type: String, required: true, unique:true },
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
     description: { type: String, required: true },
     owner: { type: String, required: true },
     price: { type: Number, required: true }, 

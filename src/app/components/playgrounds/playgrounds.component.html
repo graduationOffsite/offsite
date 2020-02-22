@@ -19,45 +19,57 @@
                 </h5>
             </div>
         </section>
+<<<<<<< HEAD
         <div class="container mx-auto">
         <div class="row mt-5 justify-content-center">
             <div class="col-lg-3 col-sm-12"> <i class="text-success fas fa-search"></i>
                 <select class="p-1 mb-3 text-dark ml-3 border border-success rounded">
+=======
+        <div class="container">
+            <div class="row px-sm-5">
+            <form class="form-inline mx-auto">
+                <label for="playgorundName"><i class="text-success fas fa-search"></i></label>
+                <input type="search" class="form-control m-2" id="playgorundName" placeholder="Enter a football playground name">
+                <label for="location"><i class="fas fa-map-marker-alt text-success"></i></label>
+                <select class="form-control m-2" id="location" placeholder="select a location">
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
                     <option class="bg-success ">select a loaction <i class="fas fa-map-marker-alt"></i></option>
-                    <option class="bg-success ">location 1</option>
-                    <option class="bg-success ">location 2</option>
-                    <option class="bg-success ">location 3</option>
+                    <option class="bg-success ">Qena</option>
+                    <option class="bg-success ">Aswan</option>
+                    <option class="bg-success ">Sohag</option>
                 </select>
+                <button type="button" class="btn btn-outline-success p-1 m-2">Search</button>
+                <button type="button" class="btn btn-outline-success p-1 m-2" data-toggle="collapse" data-target="#filters">Advanced search <i class="fas fa-stream"></i></button>
+            </form>
             </div>
-            <div class="col-lg-3 col-sm-12">
-                <button type="button" class="mb-4 float-lg-left mt-sm-3 mt-lg-n1 btn btn-outline-success" data-toggle="collapse" data-target="#filters">Advanced search <i class="fas fa-stream"></i></button>
-                </div>
-        </div>
-        <div class="row justify-content-center collapse" id="filters">
+        <div class="row justify-content-center collapse mx-auto" id="filters">
+            <form class="form-inline mx-auto">
             <div class="col-lg-3 col-sm-12 mt-1"><i class="text-success fas fa-calendar-alt"></i>
                     <input class=" ml-3 border border-success rounded col-lg-8 col-sm-4" type="date" value="2020-08-19" id="date-input">
             </div>
-            <div class="col-lg-5 col-sm-12 mt-1">
+            <div class="col-lg-6 col-sm-12 mt-1">
                 <i class="fas fa-pound-sign text-success"> /hr</i>
+                <div class="form-check-inline">
+                    <input type="checkbox" class="form-check-input">Lowest 
+                </div>
+                <div class="form-check-inline">
+                    <input type="checkbox" class="form-check-input">Highest
+                </div>
                 <div class="form-check-inline ml-3">
-                    <label class="">
-                      <input type="checkbox" class="form-check-input" value="">50+ 
-                    </label>
+                      <input type="checkbox" class="form-check-input">50+ 
                 </div>
                 <div class="form-check-inline">
-                <label class="">
-                    <input type="checkbox" class="form-check-input" value="">50-100
-                </label>
+                    <input type="checkbox" class="form-check-input">50-100
+                    
                 </div>
                 <div class="form-check-inline">
-                <label class="">
-                    <input type="checkbox" class="form-check-input" value="">100-150 
-                </label>
+                    <input type="checkbox" class="form-check-input">100-150 
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-12">
-            <button type="button" class="mb-4 float-lg-left btn btn-outline-success">Search</button>
+            <div class="col-lg-2 col-sm-12">
+            <button type="button" class="btn btn-outline-success p-1 m-2">Search</button>
             </div>
+        </form>
         </div>      
       </div>   		
     </div>
@@ -71,14 +83,22 @@
                 <div class="card p-3">
                     <div class="row">
                         <div class="col-lg-5">
+<<<<<<< HEAD
                             <img class="card-img" style="height: 100%;" src="{{playground.imagePath}}" alt="Playground image">
+=======
+                            <img class="card-img" style="height:200px;" src="{{playground.imagePath}}" alt="Playground image">
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
                             <div class="clearfix align-bottom" id="popup"> 
                                 <button class="btn btn-outline-success float-left mt-2" (click)="onSelect(playground)">book online <i class="fas fa-bolt text-warning"></i> </button>
                             </div>
                         </div>
                         <div class="col-lg-7 p-4">
                             <div class="card-body mt-lg-n4">
+<<<<<<< HEAD
                                 <h4 class="card-text pb-3"><i class="far fa-flag text-success"></i>{{playground.name}}</h4>
+=======
+                                <h4 class="card-text pb-3"><i class="far fa-flag text-success mr-2"></i>{{playground.name}}</h4>
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
                                 <h5 class="card-text pb-3">{{playground.location}}<i class="fas fa-map-marker-alt float-right"></i></h5>
                                 <h5 class="card-text mt-2"> {{playground.price}}<i class="float-right fas fa-pound-sign"> /hr</i></h5>
                                 <small class="pb-3">21 evening bookings available this week</small>
@@ -94,7 +114,22 @@
           
       </div>
     </div>
+<<<<<<< HEAD
  
     </div>
     <mat-paginator [length]="totalPlaygrounds" [pageSize]="playgroundsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
          *ngIf="playgrounds.length > 0"></mat-paginator>
+=======
+
+
+    <!-- pagenation -->
+    <ul class="pagination justify-content-center my-4 ">
+        <li class="page-item"><a class="page-link text-success" href="#">Previous</a></li>
+        <li class="page-item "><a class="page-link text-success" href="#">1</a></li>
+        <li class="page-item "><a class="page-link text-success" href="#">2</a></li>
+        <li class="page-item"><a class="page-link text-success" href="#">3</a></li>
+        <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
+      </ul>
+     
+    </div>
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c

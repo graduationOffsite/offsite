@@ -114,10 +114,17 @@ section .content h5{
 @media only screen and (min-width: 600px) {
     
     .card #popup{
+<<<<<<< HEAD
         transform: translate(70%, -50%);
     }
     .card:hover #popup button{
         font-size:35px;
+=======
+        transform: translate(80%, -50%);
+    }
+    .card:hover #popup button{
+        font-size:40px;
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
     }
 }
 @media only screen and (min-width: 768px) {
@@ -126,7 +133,11 @@ section .content h5{
         transform: translate(80%, -50%);
     }
     .card:hover #popup button{
+<<<<<<< HEAD
         font-size:45px;
+=======
+        font-size:55px;
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
     }
 }
 @media only screen and (min-width: 992px) {
@@ -135,7 +146,11 @@ section .content h5{
         transform: translate(40%, -50%);
     }
     .card:hover #popup button{
+<<<<<<< HEAD
         font-size:17px;
+=======
+        font-size:20px;
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
     }
 }
 @media only screen and (min-width:1200px) {
@@ -144,7 +159,11 @@ section .content h5{
         transform: translate(40%, -50%);
     }
     .card:hover #popup button{
+<<<<<<< HEAD
         font-size:20px;
+=======
+        font-size:25px;
+>>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
     }
 }
 /*  @media screen and (max-width:913px){
