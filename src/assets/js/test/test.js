@@ -1,5 +1,3 @@
-export function sals(){
+function sals(){
     alert('sss')
 }
-
-sals()
