@@ -4,15 +4,34 @@ const jwt = require("jsonwebtoken");
 const Player = require("../models/player");
 const Bookings = require("../models/booking");
 const Playground = require("../models/playground");
-const verifyAdmin =require('../middleware/check')
+const checkAuth=require('../middleware/check'); 
 const router = express.Router();
+
+
 router.get('/book/:id',(req,res)=>
 {
 Bookings.findOne({_id:req.params.id}).then((data)=>{
     res.status(200).json(data) ;
     // console.log(req.params.id)
+  
+}) 
 })
-})
+
+/////list all bookings for one admin
+router.get("/listbooking",checkAuth, (req, res, next)=>{ 
+    // console.log(req.adminData.adminId)
+    Playground.findOne({ownerId:req.adminData.adminId}).then(playground => {
+    //   console.log(playground);
+      Bookings.find({playgroundId:playground._id}).populate({path:'playerId',select:'name phone -_id'})
+    .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
+          console.log(data);
+        res.status(200).json(data) ; 
+    })
+
+    });
+ });
+
+
 
 router.post('/book', ( req, res) => {
     const {  selectedDate ,selectedHoursAM,selectedHoursPM ,player_Id ,playground_id }= req.body
