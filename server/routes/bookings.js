@@ -12,18 +12,6 @@ router.get('/book/:id',(req,res)=>
 {
 Bookings.findOne({_id:req.params.id}).then((data)=>{
     res.status(200).json(data) ;
-<<<<<<< HEAD
-    console.log(req.params.id)
-  
-}) 
-})
-/////list all bookings for one admin
-router.get("/listbooking",checkAuth, (req, res, next)=>{ 
-    console.log(req.adminData.adminId)
-    Playground.findOne({ownerId:req.adminData.adminId}).then(playground => {
-      console.log(playground);
-      Bookings.find({playgroundId:playground._id}).then((data)=>{
-=======
     // console.log(req.params.id)
   
 }) 
@@ -36,7 +24,6 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
     //   console.log(playground);
       Bookings.find({playgroundId:playground._id}).populate({path:'playerId',select:'name phone -_id'})
     .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
           console.log(data);
         res.status(200).json(data) ; 
     })
@@ -46,12 +33,6 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
 
 
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
 router.post('/book', ( req, res) => {
     const {  selectedDate ,selectedHoursAM,selectedHoursPM ,player_Id ,playground_id }= req.body
     let playgoundPrice_Hour;
@@ -77,11 +58,7 @@ router.post('/book', ( req, res) => {
                     }else{
                         new_booking.bookingHours.pm=selectedHoursPM
                         numberOfHoursSelected=new_booking.bookingHours.pm.length
-<<<<<<< HEAD
-                        console.log(numberOfHoursSelected);
-=======
                         // console.log(numberOfHoursSelected);
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
                         new_booking.totalPrice*=numberOfHoursSelected
                     }
                 }
@@ -89,13 +66,8 @@ router.post('/book', ( req, res) => {
                     new_booking.bookingHours.am=selectedHoursAM
                     new_booking.bookingHours.pm=selectedHoursPM
                     numberOfHoursSelected=new_booking.bookingHours.pm.length + new_booking.bookingHours.am.length
-<<<<<<< HEAD
-                    console.log('asd'+selectedHoursAM);
-                    console.log(new_booking.bookingHours.am+"asakk");
-=======
                     // console.log('asd'+selectedHoursAM);
                     // console.log(new_booking.bookingHours.am+"asakk");
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
                     
                     new_booking.totalPrice*=numberOfHoursSelected
 
@@ -103,21 +75,6 @@ router.post('/book', ( req, res) => {
                 else{
                     new_booking.bookingHours.am=selectedHoursAM
                     numberOfHoursSelected=new_booking.bookingHours.am.length
-<<<<<<< HEAD
-                    console.log(numberOfHoursSelected);
-                    new_booking.totalPrice*=numberOfHoursSelected
-                }
-                console.log(new_booking.bookingHours.am)
-                new_booking.save().then( booking=> {
-                    res.status(201).json(booking);
-                    console.log(booking)
-                        Player.findOne({_id:booking.playerId},(err,player)=>{
-                        console.log(player);
-                            if(player.cart.bookingIds.length==0){
-                                player.cart.bookingIds=[booking._id]
-                                player.cart.totalPrice=booking.totalPrice
-                                console.log(player);
-=======
                     // console.log(numberOfHoursSelected);
                     new_booking.totalPrice*=numberOfHoursSelected
                 }
@@ -131,16 +88,11 @@ router.post('/book', ( req, res) => {
                                 player.cart.bookingIds=[booking._id]
                                 player.cart.totalPrice=booking.totalPrice
                                 // console.log(player);
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
                                 Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
                                 }
                             else{
                                 player.cart.totalPrice+=booking.totalPrice
-<<<<<<< HEAD
-                                console.log(player.cart.bookingIds)
-=======
                                 // console.log(player.cart.bookingIds)
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
                                 player.cart.bookingIds.push(booking._id)
                                 Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
                             }
@@ -154,8 +106,6 @@ router.post('/book', ( req, res) => {
     }
 })
 
-<<<<<<< HEAD
-=======
 router.get('/deleteBooking/:id', ( req, res) => {
     let bookingToBeDeletedId=req.params.id
     // let player_Id=booking.playerId
@@ -190,5 +140,4 @@ router.get('/deleteBooking/:id', ( req, res) => {
     })
 })
 
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
 module.exports = router;

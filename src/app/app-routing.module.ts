@@ -13,17 +13,10 @@ import { PlaygroundCreateComponent } from './components/playground-create/playgr
 import { AuthGuard } from "src/app/components/auth.guard" 
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-<<<<<<< HEAD
 import { BookingComponent } from './components/booking/booking.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTimeComponent } from './components/add-time/add-time.component';
-=======
-import { EditComponent } from './components/edit/edit.component';
-import { AddTimeComponent } from './components/add-time/add-time.component';
-import { DeleteComponent } from './components/delete/delete.component';
-import { BookingComponent } from './components/booking/booking.component';
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
 
 
 const routes: Routes = [
@@ -32,22 +25,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'playgroundsDetails/:id',component:PlaygroundsDetailsComponent} , 
-<<<<<<< HEAD
   {path:'adminDashboard',component:AdminDashboardComponent, canActivate:[AuthGuard] } ,
-=======
-  {path:'adminDashboard',component:AdminDashboardComponent, canActivate:[AuthGuard],
-    children:[
-      {path:'edit',component:EditComponent},
-      {path:'delete',component:DeleteComponent},
-      {path:'booking',component:BookingComponent},
-      {path:'add-time',component:AddTimeComponent}
-    ]
-  },
-  {path:'edit',component:EditComponent},
-      {path:'delete',component:DeleteComponent},
-      {path:'booking',component:BookingComponent},
-      {path:'add-time',component:AddTimeComponent},
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
   {path:'player-register',component:PlayerRegisterComponent},
   {path:'admin-register',component:AdminRegisterComponent},
   {path:'player-login',component:PlayerLoginComponent},

@@ -17,17 +17,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
     if(this.playerService.authorized){
     this.playerService.getPlayerName().subscribe(response=>{
     this.playerName=response as string
-<<<<<<< HEAD
-    })
-  }}
-=======
     // this.playerService.isLoginGetName=true
     })
     
   }
 
 }
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
 
   ngOnInit() {  
     this.userIsAuthenticated = this.authService.getIsAuth();
@@ -42,11 +37,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.authService.logout();
 
   }
-<<<<<<< HEAD
 
    
-=======
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
   public playerLogOut(){
     localStorage.removeItem('playerToken')
     this.playerService.authorized = false;

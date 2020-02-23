@@ -36,10 +36,7 @@ export class PlayerLoginComponent implements OnInit {
     this.playerService.loginPlayer(this.playerModel).subscribe(
       res=>
       {
-<<<<<<< HEAD
-=======
         this.playerService.authorized=true
->>>>>>> 1656844a600190b86859e763394f9e45970c4e8c
          console.log(res)
         localStorage.setItem('playerToken',res as string)
         this.route.navigate(['/'])
