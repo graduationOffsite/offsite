@@ -99,15 +99,7 @@
           
       </div>
     </div>
-
-
-    <!-- pagenation -->
-    <ul class="pagination justify-content-center my-4 ">
-        <li class="page-item"><a class="page-link text-success" href="#">Previous</a></li>
-        <li class="page-item "><a class="page-link text-success" href="#">1</a></li>
-        <li class="page-item "><a class="page-link text-success" href="#">2</a></li>
-        <li class="page-item"><a class="page-link text-success" href="#">3</a></li>
-        <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
-      </ul>
-     
+ 
     </div>
+    <mat-paginator [length]="totalPlaygrounds" [pageSize]="playgroundsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+         *ngIf="playgrounds.length > 0"></mat-paginator>

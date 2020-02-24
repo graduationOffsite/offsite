@@ -25,22 +25,16 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'playgroundsDetails/:id',component:PlaygroundsDetailsComponent} , 
-  {path:'adminDashboard',component:AdminDashboardComponent, canActivate:[AuthGuard],
-    children:[
-      {path:'edit',component:EditComponent},
-      {path:'delete',component:DeleteComponent},
-      {path:'booking',component:BookingComponent},
-      {path:'add-time',component:AddTimeComponent}
-    ]
-  },
-  {path:'edit',component:EditComponent},
-      {path:'delete',component:DeleteComponent},
-      {path:'booking',component:BookingComponent},
-      {path:'add-time',component:AddTimeComponent},
+  {path:'adminDashboard',component:AdminDashboardComponent, canActivate:[AuthGuard] } ,
   {path:'player-register',component:PlayerRegisterComponent},
   {path:'admin-register',component:AdminRegisterComponent},
   {path:'player-login',component:PlayerLoginComponent},
   {path:'admin-login',component:AdminLoginComponent},
+  {path:'booking',component:BookingComponent, canActivate:[AuthGuard] },
+  {path:'delete',component:DeleteComponent, canActivate:[AuthGuard] },
+  {path:'edit',component:EditComponent, canActivate:[AuthGuard]},
+  {path:'edit/:playgroundId',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
+  {path:'addTime',component:AddTimeComponent, canActivate:[AuthGuard] },
   {path:'createPlayground',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
   {path:'**',component:PagenotfoundComponent}
   
@@ -52,3 +46,4 @@ const routes: Routes = [
   providers:[AuthGuard]
 })
 export class AppRoutingModule { }
+ 

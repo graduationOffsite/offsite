@@ -10,7 +10,8 @@ import {
   MatToolbarModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
-  MatSelectModule
+  MatSelectModule,
+  MatPaginatorModule
 } from "@angular/material";
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -76,7 +77,8 @@ import { PlayerService } from './components/services/player/player.service';
     MatToolbarModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule
     
   ],
   providers: [

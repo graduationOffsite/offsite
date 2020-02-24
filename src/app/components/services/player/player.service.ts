@@ -29,7 +29,7 @@ export class PlayerService {
     observe :'body',   
     params : new HttpParams().append('playerToken',localStorage.getItem('playerToken'))});
     }
-  
+
     getToken(){
       return localStorage.getItem('playerToken')
     }

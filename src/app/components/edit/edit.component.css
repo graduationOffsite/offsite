@@ -1,4 +1,4 @@
-.container-fluid{
+/* .container-fluid{
     background-image: url('./../../../assets/images/playground.jpg');
     background-size: cover;
     background-position: center center;
@@ -28,4 +28,40 @@ button:hover{
 a{
     margin-right: 50px;
     z-index: auto;
-      }
+ } */
+
+ /* :host {
+  display: block;
+  margin-top: 1rem;
+} */
+main {
+  margin-top:50px;
+  width: 80%;
+  margin: 1rem auto;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-paginator {
+  margin-top: 1rem;
+}
+button{
+  color:blue
+}
+
+.info-text {
+  text-align: center;
+}
+
+.playground-image {
+  width: 100%;
+}
+
+.plyground-image img {
+  width: 50%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+

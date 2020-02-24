@@ -7,8 +7,9 @@ import { AdminSrviceService } from '../services/admin-srvice.service';
   styleUrls: ['./delete.component.css']
 })
 export class DeleteComponent implements OnInit {
+  reservations;
   bookings: Object;
-  constructor(private adminService:AdminSrviceService) { }
+  constructor(public adminService :AdminSrviceService) { }
 
   ngOnInit() {
     this.adminService.getBookings().subscribe(bookings=>{
