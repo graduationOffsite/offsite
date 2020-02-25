@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class PlaygroundsComponent implements OnInit,OnDestroy {
  playgrounds: Playground[] = [];
+ sortingOrder=1;
  totalPlaygrounds = 0;
  playgroundsPerPage = 2;
  currentPage = 1;
@@ -22,21 +23,19 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
   constructor(private playgroundServ:PlaygroundsService,private router: Router ) { }
 
   ngOnInit() {
-    this.playgroundServ.getPlaygrounds(this.playgroundsPerPage, this.currentPage);
+    this.playgroundServ.getPlaygrounds(this.playgroundsPerPage, this.currentPage, this.sortingOrder);
     this.playgroundSub=this.playgroundServ.getPlaygroundUpdateListener()
     .subscribe((playgroundsData: {playgrounds:Playground[],playgroundCount: number}) => {
       this.playgrounds =playgroundsData.playgrounds
       this.totalPlaygrounds=playgroundsData.playgroundCount;
-
-      console.log(this.playgrounds);
-      
+  
     }) 
   }
 
   onChangedPage(pageData: PageEvent) { 
     this.currentPage = pageData.pageIndex + 1;
     this.playgroundsPerPage = pageData.pageSize;
-    this.playgroundServ.getPlaygrounds(this.playgroundsPerPage, this.currentPage);
+    this.playgroundServ.getPlaygrounds(this.playgroundsPerPage, this.currentPage, this.sortingOrder);
     this.playgroundSub=this.playgroundServ.getPlaygroundUpdateListener()
 
     .subscribe((playgrounds: {playgrounds:Playground[],playgroundCount: number}) => {
@@ -48,6 +47,18 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
     })
   }
 
+  onSort(){
+    this.sortingOrder=this.sortingOrder==1? -1:1  
+    this.playgroundServ.getPlaygrounds(this.playgroundsPerPage, this.currentPage, this.sortingOrder);
+    this.playgroundSub=this.playgroundServ.getPlaygroundUpdateListener()
+    .subscribe((playgroundsData: {playgrounds:Playground[],playgroundCount: number}) => {
+      this.playgrounds =playgroundsData.playgrounds
+      this.totalPlaygrounds=playgroundsData.playgroundCount;
+  
+    }) 
+
+  }
+    
 
   onSelect(playground){
     this.router.navigate(['/playgroundsDetails',playground.id])

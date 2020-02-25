@@ -24,7 +24,7 @@ router.post("/adminSignup", (req, res, next) => {
       })
       .catch(err => {
         res.status(500).json({
-          error: err
+          message: 'Phone Number Already Exist'
         });
       });
   });
@@ -36,7 +36,7 @@ router.post("/adminLogin", (req, res, next) => {
     .then(admin => {
       if (!admin) {
         return res.status(401).json({
-          message: "Failed"
+          message: "Phone number is incorrect"
         });
       }
       fetchedUser = admin;
@@ -45,7 +45,7 @@ router.post("/adminLogin", (req, res, next) => {
     .then(result => {
       if (!result) {
         return res.status(401).json({
-          message: "Failed"
+          message: "Error password ,Please type it again"
         });
       }
       const token = jwt.sign(
@@ -60,7 +60,7 @@ router.post("/adminLogin", (req, res, next) => {
     })
     .catch(err => {
       return res.status(401).json({
-        message: "Failed"
+        message: "Invalid Phone or Password"
       });
     });
 });

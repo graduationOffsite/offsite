@@ -53,6 +53,9 @@
                 <label class="">
                     <input type="checkbox" class="form-check-input" value="">100-150 
                 </label>
+                <button class="btn btn-primary" (click)="onSort()">sort by price</button>
+                 
+
                 </div>
             </div>
             <div class="col-lg-3 col-sm-12">
@@ -66,7 +69,8 @@
          
       <div class="row pb-3" 
        >
-        <div class="col-sm-12 col-lg-6 pb-3 pl-4" *ngFor="let playground of playgrounds; let i = index">
+        
+        <div  class="col-sm-12 col-lg-6 pb-3 pl-4" *ngFor="let playground of playgrounds; let i = index">
             <div class="container">
                 <div class="card p-3">
                     <div class="row">
@@ -80,7 +84,7 @@
                             <div class="card-body mt-lg-n4">
                                 <h4 class="card-text pb-3"><i class="far fa-flag text-success"></i>{{playground.name}}</h4>
                                 <h5 class="card-text pb-3">{{playground.location}}<i class="fas fa-map-marker-alt float-right"></i></h5>
-                                <h5 class="card-text mt-2"> {{playground.price}}<i class="float-right fas fa-pound-sign"> /hr</i></h5>
+                                <h5 class="card-text mt-2" > {{playground.price}}<i class="float-right fas fa-pound-sign"> /hr</i></h5>
                                 <small class="pb-3">21 evening bookings available this week</small>
 
                             </div>
@@ -93,6 +97,7 @@
         </div>
           
       </div>
+     
     </div>
  
     </div>
