@@ -39,7 +39,7 @@ export class PlayerLoginComponent implements OnInit {
         this.playerService.authorized=true
          console.log(res)
         localStorage.setItem('playerToken',res as string)
-        // this.route.navigate(['/'])
+        this.route.navigate(['/'])
         
     },
     error=>

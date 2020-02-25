@@ -1,6 +1,5 @@
 import { Component, OnInit,  } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { Playground } from '../playground.model';
 import { PlaygroundsService } from '../services/playgrounds.service'
 import {test} from './test'
 import { BookingsService } from '../services/booking/bookings.service';
@@ -44,7 +43,7 @@ export class PlaygroundsDetailsComponent implements OnInit {
   }
   test(userSelectedDate,playground_id,AM,PM){
     this.bookingModel=new test(userSelectedDate,AM,PM,playground_id)
-    // console.log(typeof(this.userSelectedAmHours)+' '+typeof(userSelectedDate)+' '+typeof(playground_id));
+    console.log(typeof(AM)+' '+AM);
     this.bookingsService.test(this.bookingModel).subscribe(
       response =>{
         console.log(response)

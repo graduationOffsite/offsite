@@ -84,7 +84,7 @@ import { PlayerService } from './components/services/player/player.service';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: PlayerTokenInterceptorService, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: PlayerTokenInterceptorService, multi: true },
     PlayerService
   ],
   bootstrap: [AppComponent]
