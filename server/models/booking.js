@@ -15,7 +15,7 @@ const booking=new Schema({
             required:true
     },
     bookingDate:{
-        type:Date,
+        type:String,
         required:true
     },
     bookingHours: {

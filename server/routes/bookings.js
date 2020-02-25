@@ -8,6 +8,21 @@ const checkAuth=require('../middleware/check');
 const router = express.Router();
 
 
+var Token = ''
+function verifyToken(req,res,next){
+//   console.log(req.query.playerToken);
+  let playerToken=req.query.playerToken
+  jwt.verify(playerToken,'Shhhh',(err , verifytoken)=>{
+    if (err)
+    return res.status(400).json({Msg : 'you are unauthorized'})
+    if (verifytoken){
+        Token = verifytoken;
+      next();
+    }
+    }
+)}
+
+
 router.get('/book/:id',(req,res)=>
 {
 Bookings.findOne({_id:req.params.id}).then((data)=>{
@@ -32,9 +47,9 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
  });
 
 
-
-router.post('/book', ( req, res) => {
-    const {  selectedDate ,selectedHoursAM,selectedHoursPM ,player_Id ,playground_id }= req.body
+router.post('/book',verifyToken, ( req, res) => {
+    const player_Id =Token.playerId;
+    const {  selectedDate ,selectedHoursAM,selectedHoursPM , playgroundId }= req.body
     let playgoundPrice_Hour;
     if(!selectedDate){
         res.status(501).json({msg: 'Please select a date'}) ;
@@ -44,16 +59,16 @@ router.post('/book', ( req, res) => {
         let timeNow=new Date()
         var new_booking= new Bookings({
         bookingDate:selectedDate,
-        playgroundId:playground_id,
+        playgroundId:playgroundId,
         playerId:player_Id,
         reservationDate:timeNow.toLocaleString()
             })
         let numberOfHoursSelected;
-        Playground.findOne({_id:playground_id}).then((playground)=>{
+        Playground.findOne({_id:playgroundId}).then((playground)=>{
             playgoundPrice_Hour=playground.price
              new_booking.totalPrice = playgoundPrice_Hour*nubmerOfHoursInPeriod
-                if(!selectedHoursAM){
-                    if(!selectedHoursPM){
+                if(selectedHoursAM.length===0){
+                    if(selectedHoursPM.length===0){
                         res.status(501).json({msg: 'Please select an hour at least'}) ;
                     }else{
                         new_booking.bookingHours.pm=selectedHoursPM
@@ -62,7 +77,7 @@ router.post('/book', ( req, res) => {
                         new_booking.totalPrice*=numberOfHoursSelected
                     }
                 }
-                else if(selectedHoursAM && selectedHoursPM){
+                else if(selectedHoursAM.length>0 && selectedHoursPM.length>0){
                     new_booking.bookingHours.am=selectedHoursAM
                     new_booking.bookingHours.pm=selectedHoursPM
                     numberOfHoursSelected=new_booking.bookingHours.pm.length + new_booking.bookingHours.am.length
@@ -106,6 +121,34 @@ router.post('/book', ( req, res) => {
     }
 })
 
+router.post('/books',verifyToken,( req, res) => {
+    const player_Id =Token.playerId;
+    const {  selectedDate ,selectedHoursAM,selectedHoursPM , playgroundId }= req.body
+    console.log(typeof(selectedDate))
+    if(!selectedDate){
+        res.status(501).json({msg: 'Please select a date'}) ;
+    }
+    else{
+        Bookings.find({bookingDate:selectedDate}).then(booking=>{
+            console.log(booking)
+            amA=booking.map(b=>{
+                var am=b.bookingHours.am
+                console.log('from angular am '+selectedHoursAM+' type of '+typeof(JSON.stringify(selectedHoursAM)))
+                console.log('from database am '+am+' type of '+typeof(JSON.stringify(am)))
+                
+                return !!JSON.stringify(selectedHoursAM) == JSON.stringify(am)
+            })
+            pmA=booking.map(b=>{
+                var pm=b.bookingHours.pm
+                console.log('from angular pm '+selectedHoursPM+' type of '+typeof(JSON.stringify(selectedHoursPM)))
+                console.log('from database pm '+pm+' type of '+typeof(JSON.stringify(pm)))
+                
+                return !!JSON.stringify(selectedHoursPM) == JSON.stringify(pm)
+            })
+            console.log(pmA)
+        })
+    }
+  })
 router.get('/deleteBooking/:id', ( req, res) => {
     let bookingToBeDeletedId=req.params.id
     // let player_Id=booking.playerId

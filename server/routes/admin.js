@@ -2,11 +2,8 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-
 const Admin = require("../models/admin");
 const router = express.Router();
-
-
   
 router.post("/adminSignup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {

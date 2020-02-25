@@ -30,6 +30,7 @@ import { PlayerLoginComponent } from './components/player-login/player-login.com
 import { PlayerRegisterComponent } from './components/player-register/player-register.component';
 import { AdminRegisterComponent } from './components/admin-register/admin-register.component';
 import { AuthInterceptor } from './components/auth-interceptor';
+import {PlayerTokenInterceptorService} from '../app/components/services/auth/intercepter/player-token-interceptor.service'
 import { PlaygroundCreateComponent } from './components/playground-create/playground-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
@@ -83,6 +84,7 @@ import { PlayerService } from './components/services/player/player.service';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: PlayerTokenInterceptorService, multi: true },
     PlayerService
   ],
   bootstrap: [AppComponent]

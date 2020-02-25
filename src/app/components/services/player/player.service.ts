@@ -18,7 +18,7 @@ export class PlayerService {
   }
   public loginPlayer(player:playerLogin){
     // this.authorized=true
-    return this.http.post('http://localhost:3000/player/login',player)
+    return this.http.post('http://localhost:3000/player/login',player )
     }
     public auth(){
       return !!localStorage.getItem('playerToken')
@@ -33,4 +33,11 @@ export class PlayerService {
     getToken(){
       return localStorage.getItem('playerToken')
     }
+    public test(plId){
+      return this.http.get('http://localhost:3000/player/books/'+plId,{
+      observe :'body',   
+      params : new HttpParams().append('playerToken',localStorage.getItem('playerToken'))
+      }
+      );
+      }
 }
