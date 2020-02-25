@@ -123,29 +123,36 @@ router.post('/book',verifyToken, ( req, res) => {
 
 router.post('/books',verifyToken,( req, res) => {
     const player_Id =Token.playerId;
+    let checkPm=false;
+    let checkAm=false;
     const {  selectedDate ,selectedHoursAM,selectedHoursPM , playgroundId }= req.body
-    console.log(typeof(selectedDate))
     if(!selectedDate){
         res.status(501).json({msg: 'Please select a date'}) ;
     }
     else{
-        Bookings.find({bookingDate:selectedDate}).then(booking=>{
+        Bookings.find({bookingDate:selectedDate , playgroundId: playgroundId}).then(booking=>{
             console.log(booking)
-            amA=booking.map(b=>{
+            booking.map(b=>{
                 var am=b.bookingHours.am
-                console.log('from angular am '+selectedHoursAM+' type of '+typeof(JSON.stringify(selectedHoursAM)))
-                console.log('from database am '+am+' type of '+typeof(JSON.stringify(am)))
-                
-                return !!JSON.stringify(selectedHoursAM) == JSON.stringify(am)
+                console.log('from angular am '+selectedHoursAM+' type of '+typeof(selectedHoursAM))
+                console.log('from database am '+am+' type of '+typeof(am))
+                if(JSON.stringify(selectedHoursAM) == JSON.stringify(am))
+                checkAm= true;
             })
-            pmA=booking.map(b=>{
+            booking.map(b=>{
                 var pm=b.bookingHours.pm
-                console.log('from angular pm '+selectedHoursPM+' type of '+typeof(JSON.stringify(selectedHoursPM)))
-                console.log('from database pm '+pm+' type of '+typeof(JSON.stringify(pm)))
+                console.log('from angular pm '+selectedHoursPM+' type of '+typeof((selectedHoursPM)))
+                console.log('from database pm '+pm+' type of '+typeof((pm)))
+                if(JSON.stringify(selectedHoursPM) == JSON.stringify(pm)){
+                    checkPm= true;
+                }
                 
-                return !!JSON.stringify(selectedHoursPM) == JSON.stringify(pm)
             })
-            console.log(pmA)
+            console.log(checkPm +' pm ... '+checkAm+' am')
+            if(checkPm==true && checkAm ==true){
+                res.status(501).json({message:'try anthor hours'})
+            }
+
         })
     }
   })

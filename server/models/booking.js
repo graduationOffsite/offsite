@@ -19,14 +19,14 @@ const booking=new Schema({
         required:true
     },
     bookingHours: {
-        am:[{
-            type:String,
+        am:{
+            type:[String],
             required:true
-        }],
-        pm:[{
-            type:String,
+        },
+        pm:{
+            type:[String],
             required:true
-        }]
+        }
     }, 
     reservationDate:{
         type:String,
