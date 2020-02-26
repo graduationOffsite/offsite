@@ -8,7 +8,7 @@ import { BookingsService } from '../services/booking/bookings.service';
 })
 export class DeleteComponent implements OnInit {
   reservations;
-  bookings: Object;
+  bookings;
   constructor(public bookingService :BookingsService) { }
 
   ngOnInit() {

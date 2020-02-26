@@ -131,48 +131,48 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
 //     }
 // })
 
-router.post('/books',verifyToken,( req, res) => {
-    const player_Id =Token.playerId;
-    let checkPm=true;
-    let checkAm=true;
-    const {  selectedDate ,selectedHoursAM,selectedHoursPM , playgroundId }= req.body
-    if(!selectedDate){
-        res.status(501).json({msg: 'Please select a date'}) ;
-    }
-    else{
-        Bookings.find({bookingDate:selectedDate , playgroundId: playgroundId}).then(booking=>{
-            console.log(booking)
-            booking.map(b=>{
-                var am=b.bookingHours.am
-                console.log('from angular am '+selectedHoursAM+' type of '+typeof(selectedHoursAM))
-                console.log('from database am '+am+' type of '+typeof(am))
-                if(JSON.stringify(am).length>JSON.stringify(selectedHoursAM).length){
-                    console.log("substraction"+JSON.stringify(am).replace(JSON.stringify(selectedHoursAM),'PPP'))
-                }
-                if(JSON.stringify(am).indexOf(JSON.stringify(selectedHoursAM))!==-1 && JSON.stringify(selectedHoursAM).indexOf(JSON.stringify(am))!==-1){
-                  checkAm= false;  
-                }
+// router.post('/books',verifyToken,( req, res) => {
+//     const player_Id =Token.playerId;
+//     let checkPm=true;
+//     let checkAm=true;
+//     const {  selectedDate ,selectedHoursAM,selectedHoursPM , playgroundId }= req.body
+//     if(!selectedDate){
+//         res.status(501).json({msg: 'Please select a date'}) ;
+//     }
+//     else{
+//         Bookings.find({bookingDate:selectedDate , playgroundId: playgroundId}).then(booking=>{
+//             console.log(booking)
+//             booking.map(b=>{
+//                 var am=b.bookingHours.am
+//                 console.log('from angular am '+selectedHoursAM+' type of '+typeof(selectedHoursAM))
+//                 console.log('from database am '+am+' type of '+typeof(am))
+//                 if(JSON.stringify(am).length>JSON.stringify(selectedHoursAM).length){
+//                     console.log("substraction"+JSON.stringify(am).replace(JSON.stringify(selectedHoursAM),'PPP'))
+//                 }
+//                 if(JSON.stringify(am).indexOf(JSON.stringify(selectedHoursAM))!==-1 && JSON.stringify(selectedHoursAM).indexOf(JSON.stringify(am))!==-1){
+//                   checkAm= false;  
+//                 }
                 
-            })
-            booking.map(b=>{
-                var pm=b.bookingHours.pm
-                console.log('from angular pm '+selectedHoursPM+' type of '+typeof((selectedHoursPM)))
-                console.log('from database pm '+pm+' type of '+typeof((pm)))
-                if(JSON.stringify(pm).indexOf(JSON.stringify(selectedHoursPM))!==-1){
-                    checkPm= false;
-                }
+//             })
+//             booking.map(b=>{
+//                 var pm=b.bookingHours.pm
+//                 console.log('from angular pm '+selectedHoursPM+' type of '+typeof((selectedHoursPM)))
+//                 console.log('from database pm '+pm+' type of '+typeof((pm)))
+//                 if(JSON.stringify(pm).indexOf(JSON.stringify(selectedHoursPM))!==-1){
+//                     checkPm= false;
+//                 }
                 
-            })
-            console.log(checkPm +' pm ... '+checkAm+' am')
+//             })
+//             console.log(checkPm +' pm ... '+checkAm+' am')
             
-            if(!checkPm || !checkAm ){
-                res.status(501).json({message:'try anthor hours'})
+//             if(!checkPm || !checkAm ){
+//                 res.status(501).json({message:'try anthor hours'})
 
-            }
+//             }
 
-        })
-    }
-  })
+//         })
+//     }
+//   })
 router.get('/deleteBooking/:id', ( req, res) => {
     let bookingToBeDeletedId=req.params.id
     // let player_Id=booking.playerId
@@ -253,9 +253,48 @@ router.post("/avetest",(req, res, next)=>{
 
  router.post('/book',verifyToken, ( req, res) => {
     const player_Id =Token.playerId;
-    //////
 
+    let timeNow=new Date()
+    var new_booking= new Bookings({
+    bookingDate:req.body.selectedDate,
+    playgroundId:req.body.playgroundId,
+    playerId:player_Id,
+    totalPrice:0,
+    reservationDate:timeNow.toLocaleString(),
+    bookingPmHours:req.body.selectedHoursPM,
+    bookingAmHours:req.body.selectedHoursAM
+
+    })
+    
+    new_booking.save().then(booking=>{
+        console.log(typeof(booking.bookingPmHours))
+    })
  })
+
+
+ router.post('/books',( req, res) => {
+    const player_Id =Token.playerId;
+    const date=req.body.selectedDate;
+    const playgroundId=req.body.playgroundId;
+    const comingAm=req.body.selectedHoursAM
+    const comingPm=req.body.selectedHoursPM
+    var allAm=[];
+    const allBm=[]
+    Bookings.find({bookingDate:date , playgroundId: playgroundId}).then(bookinData=>{
+        bookinData.map(b=>{
+        //    allAm.push(b.bookingAmHours); 
+             
+        })
+        // allAm.map(am=>{
+            
+        //        console.log(JSON.stringify(am) +'..'+typeof(JSON.stringify(am)))
+        //    })
+        // console.log(allAm)
+    })
+    
+ })
+
+
         
 
 module.exports = router;
