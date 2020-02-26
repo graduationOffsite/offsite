@@ -12,11 +12,13 @@ import { Router } from '@angular/router';
 export class PlaygroundsService {
   private playgrounds:Playground[] = [];
   private playgroundsUpdated = new Subject<{playgrounds:Playground[], playgroundCount: number }>();
+  private playgroundsSortUpdated = new Subject<{playgroundsdec:Playground[],playgroundsasc:Playground[], playgroundCount: number }>();
+
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getPlaygrounds(playgroundPerPage: number, currentPage: number){
-    const queryParams = `?pagesize=${playgroundPerPage}&page=${currentPage}`;
+  getPlaygrounds(playgroundPerPage: number, currentPage: number,sortingOrder:number){
+    const queryParams = `?pagesize=${playgroundPerPage}&page=${currentPage}&sortingOrder=${sortingOrder}`;
     this.http
     .get<{ message: string; playgrounds: any;
       maxPlaygrounds: number  }>(
@@ -56,6 +58,11 @@ export class PlaygroundsService {
   getPlaygroundUpdateListener() {
     return this.playgroundsUpdated.asObservable();
   }
+  getPlaygroundSortUpdateListener() {
+    return this.playgroundsSortUpdated.asObservable();
+  }
+
+  
 
   getDetails(id):Observable<any>{
     return this.http.get<any>('http://localhost:3000/playgrounds/'+id);
@@ -86,7 +93,7 @@ addPlayground(
     .post<{ message: string, playground:Playground }>
     ("http://localhost:3000/playgrounds/postPlay", playgroundData)
     .subscribe(responseData =>{
-      // this.router.navigate(["/"]); 
+      this.router.navigate(["/playgrounds"]); 
     })  
   }
 
@@ -133,7 +140,7 @@ addPlayground(
       this.http
       .put("http://localhost:3000/playgrounds/" + id, playgroundData)
       .subscribe(response => {
-        // this.router.navigate(["/"]);
+        this.router.navigate(["/edit"]);
       });
        
   }

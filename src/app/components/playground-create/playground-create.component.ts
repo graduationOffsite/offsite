@@ -14,21 +14,16 @@ import { Playground } from '../playground.model';
 export class PlaygroundCreateComponent implements OnInit {
   private mode = "create";
   private playgroundId: string;
-  playground:Playground;
-  // enterdPlayName='';
-  // enterdPlayDesc='';
-  // enterdPlayOwner='';
-  // enterdPlayPrice;
-  // enterdPlayPhone='';
+  playground:Playground;  
   selectedPmHours;
   selectedAmHours;
   selectedLocation='';
   form: FormGroup; 
   imagePreview: any; 
-  // im=this.imagePreview.toString()
   avaliableList = 
   ['12-02', '02-04', '04-06', '06-08', '08-10', '10-12'];
-  locations=['qena','cairo','aswan','banha'];
+  locations=['Qena','Cairo','Aswan','Banha','Asyut',
+  'Beni Suef','Alexandria','Gizeh','Luxor','al-Mansura','Sohag','al-Minya','Ismailia','Tanta'];
 
   
   constructor(public playgroundServ:PlaygroundsService,public route:ActivatedRoute) { }
@@ -84,7 +79,7 @@ export class PlaygroundCreateComponent implements OnInit {
     })
  
   }
-  // console.log(this.imagePreview );
+  
 
 
   ngOnInit() { 

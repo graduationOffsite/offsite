@@ -13,10 +13,10 @@ import { PlaygroundCreateComponent } from './components/playground-create/playgr
 import { AuthGuard } from "src/app/components/auth.guard" 
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { BookingComponent } from './components/booking/booking.component';
+import { DeleteComponent } from './components/delete/delete.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTimeComponent } from './components/add-time/add-time.component';
-import { DeleteComponent } from './components/delete/delete.component';
-import { BookingComponent } from './components/booking/booking.component';
 
 
 const routes: Routes = [

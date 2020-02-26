@@ -58,6 +58,8 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.authService.logout();
 
   }
+
+   
   public playerLogOut(){
     localStorage.removeItem('playerToken')
     this.playerService.authorized = false;

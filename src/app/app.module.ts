@@ -11,7 +11,10 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatSelectModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule,
+  MatSortModule
+
 } from "@angular/material";
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -40,6 +43,8 @@ import { DeleteComponent } from './components/delete/delete.component';
 import { BookingComponent } from './components/booking/booking.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component'
 import { PlayerService } from './components/services/player/player.service';
+import { ErrorComponent } from './components/error/error.component';
+import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
   declarations: [
@@ -63,6 +68,7 @@ import { PlayerService } from './components/services/player/player.service';
     DeleteComponent,
     BookingComponent,
     PagenotfoundComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,14 +85,18 @@ import { PlayerService } from './components/services/player/player.service';
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSortModule
     
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: PlayerTokenInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     PlayerService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }

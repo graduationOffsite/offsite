@@ -10,7 +10,7 @@ export class BookingsService {
 
   public makeBooking(bookingInfo){
     console.log(bookingInfo)
-    return this.http.post('http://localhost:3000/bookings/books',bookingInfo,{
+    return this.http.post('http://localhost:3000/bookings/book',bookingInfo,{
       observe :'body',   
       params : new HttpParams().append('playerToken',localStorage.getItem('playerToken'))
       });

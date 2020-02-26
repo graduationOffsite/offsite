@@ -50,7 +50,7 @@ export class PlayerService {
       console.log('timer start')
       setTimeout(()=>{
         this.removeToken();
-      },60000)
+      },3600*1000)
     }
   }
 }

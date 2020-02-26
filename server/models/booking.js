@@ -18,16 +18,8 @@ const booking=new Schema({
         type:String,
         required:true
     },
-    bookingHours: {
-        am:{
-            type:[String],
-            required:true
-        },
-        pm:{
-            type:[String],
-            required:true
-        }
-    }, 
+    bookingPmHours: {type:[String]},
+    bookingAmHours: {type:[String]}, 
     reservationDate:{
         type:String,
         required:true

@@ -13,7 +13,7 @@ import { BookingsService } from '../services/booking/bookings.service';
 export class PlaygroundsDetailsComponent implements OnInit {
   playground;
   code;
-  // userSelectedDate;
+  userSelectedDate;
   // userSelectedAmHours;
   // userSelectedPmHours;
   isLoading=false;

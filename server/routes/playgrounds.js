@@ -43,6 +43,11 @@ router.get("/ownerPlayground",checkAuth, (req, res, next) => {
         } else {
           res.status(404).json({ message: "playground not found!" });
         }
+      })
+      .catch(error=>{
+        res.status(500).json({
+          message:'Sorry, somthing went wrong!!'
+        })
       });
     }); 
 
@@ -52,10 +57,12 @@ router.get("/getPlaygrounds", (req, res, next)=>{
   console.log(req.query) 
   const pageSize= +req.query.pagesize;
   const currentPage= +req.query.page;
+  const sortingOrder= +req.query.sortingOrder
+  console.log(typeof(sortingOrder));
   let fetchedPlygrounds;
   const mong=Playground.find()
   if(pageSize && currentPage){
-    mong.skip(pageSize * (currentPage - 1))
+    mong.sort({price:sortingOrder}).skip(pageSize * (currentPage - 1))
   .limit(pageSize)
   }
   mong.then(documents => {
@@ -69,7 +76,12 @@ router.get("/getPlaygrounds", (req, res, next)=>{
         playgrounds:fetchedPlygrounds,
         maxPlaygrounds:count
       });
-     }); 
+     })
+     .catch(error=>{
+      res.status(500).json({
+        message:'Fetching Playgrounds Failed!!'
+      })
+    }); 
   });
 
 
@@ -82,6 +94,11 @@ router.get("/:id", (req, res, next) => {
       } else {
         res.status(404).json({ message: "playground not found!" });
       }
+    })
+    .catch(error=>{
+      res.status(500).json({
+        message:'Fetching Playground Failed!!'
+      })
     });
   }); 
 
@@ -112,6 +129,11 @@ router.post('/postPlay',checkAuth,
              
           }
         });
+      })
+      .catch(error=>{
+        res.status(500).json({
+          message:'You already have playground for this account'
+        })
       });
     });
 
@@ -157,8 +179,14 @@ router.put(
         });
       }
         console.log(playground);
-        Playground.updateOne({ _id: req.params.id }, playground).then(result => {
+        Playground.updateOne({ _id: req.params.id }, playground)
+        .then(result => {
           res.status(200).json({ message: "Update successful!" });
+        })
+        .catch(error=>{
+          res.status(500).json({
+            message:'Updating Failed!!'
+          })
         });
        
  }) 

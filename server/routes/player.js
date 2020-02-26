@@ -8,20 +8,20 @@ const router = express.Router();
 router.post("/signup", (req, res, next) => {
     const {playerName,playerPhone, location ,password , repeatPassword}= req.body
     if (!playerName || !playerPhone || !password || !location || !repeatPassword) {
-        res.status(501).json({Msg: 'Please enter all fields'}) ;
+        res.status(501).json({message: 'Please enter all fields'}) ;
         }
     else if (password != repeatPassword) {
-      res.status(501).json({Msg: "Passwords doesn't match"}) ;
+      res.status(501).json({message: "Passwords doesn't match"}) ;
     }
     else{
         Player.findOne({ phone: playerPhone }).then(player => {
             if (player) {
-                res.status(501).json({Msg: "This phone is already exists! try anther one"});
+                res.status(501).json({message: "This phone is already exists! try anther one"});
                 } 
             else {
                 Player.findOne({ name: playerName }).then(player => {
                     if (player) {
-                        res.status(501).json({Msg: "This name is already exists! try anther one"});
+                        res.status(501).json({message: "This name is already exists! try anther one"});
                         } 
                     else{
                         bcrypt.genSalt(10, (err,salt) => {
@@ -36,8 +36,10 @@ router.post("/signup", (req, res, next) => {
                         console.log(result);
                         res.status(201).json(result);
                         }).catch(err => {
-                        res.status(501).json({error: err});
-                      });
+                          res.status(500).json({
+                            message: 'Phone Number Already Exist'
+                          });
+                        })
                     })
                     });
                     }   
@@ -52,22 +54,24 @@ router.post("/login", (req, res, next) => {
   let fetchedPlayer ;
   Player.findOne({ phone: req.body.playerPhone }).then(player => {
       if (!player) {
-        return res.status(401).json({Msg:'this phone number is not found if you have not registered yet got to sign up down there'});
+        return res.status(401).json({message:'this phone number is not found if you have not registered yet got to sign up down there'});
       }
       // console.log(player);
       fetchedPlayer = player;
       return bcrypt.compare(req.body.password, player.password)})
       .then( isMatch => {
         if (!isMatch) {
-          return res.status(401).json({Msg: "password doesn't match"});
+          return res.status(401).json({message: "password doesn't match"});
         }
 
           let playerToken = jwt.sign({player_name : fetchedPlayer.name ,playerId: fetchedPlayer._id} ,'Shhhh',{expiresIn:'1h'})
           // console.log(fetchedUser);
           res.status(200).json(playerToken);
         }).catch(err => {
-      res.status(501).json({error: err});
-    });
+          return res.status(401).json({
+            message: "Invalid Phone or Password"
+          });
+        });
 })
 
 
@@ -77,7 +81,7 @@ function verifyToken(req,res,next){
   let playerToken=req.query.playerToken
   jwt.verify(playerToken,'Shhhh',(err , verifytoken)=>{
     if (err)
-    return res.status(400).json({Msg : 'you are unauthorized'})
+    return res.status(400).json({message : 'you are unauthorized'})
     if (verifytoken){
         Token = verifytoken;
       next();
