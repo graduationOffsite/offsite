@@ -44,7 +44,7 @@ export class PlaygroundsDetailsComponent implements OnInit {
   test(userSelectedDate,playground_id,AM,PM){
     this.bookingModel=new test(userSelectedDate,AM,PM,playground_id)
     console.log(typeof(AM)+' '+AM);
-    this.bookingsService.test(this.bookingModel).subscribe(
+    this.bookingsService.makeBooking(this.bookingModel).subscribe(
       response =>{
         console.log(response)
       }

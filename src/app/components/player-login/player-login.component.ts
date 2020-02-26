@@ -40,7 +40,7 @@ export class PlayerLoginComponent implements OnInit {
          console.log(res)
         localStorage.setItem('playerToken',res as string)
         this.route.navigate(['/'])
-        
+        this.playerService.setTimer()
     },
     error=>
     {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminSrviceService } from '../services/admin-srvice.service';
+import { BookingsService } from '../services/booking/bookings.service';
 
 @Component({
   selector: 'app-delete',
@@ -9,17 +9,17 @@ import { AdminSrviceService } from '../services/admin-srvice.service';
 export class DeleteComponent implements OnInit {
   reservations;
   bookings: Object;
-  constructor(public adminService :AdminSrviceService) { }
+  constructor(public bookingService :BookingsService) { }
 
   ngOnInit() {
-    this.adminService.getBookings().subscribe(bookings=>{
+    this.bookingService.getBookings().subscribe(bookings=>{
       this.bookings=bookings
       console.log(this.bookings);
       
     })
   }
   deleteBooking(booking_id){
-    this.adminService.deleteBooking(booking_id).subscribe(err=>{
+    this.bookingService.deleteBooking(booking_id).subscribe(err=>{
       console.log('delete done')
     })
   }

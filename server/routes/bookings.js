@@ -134,8 +134,10 @@ router.post('/books',verifyToken,( req, res) => {
             console.log(booking)
             booking.map(b=>{
                 var am=b.bookingHours.am
-                console.log('from angular am '+selectedHoursAM+' type of '+typeof(selectedHoursAM))
-                console.log('from database am '+am+' type of '+typeof(am))
+                var x=JSON.stringify(selectedHoursAM).split(',')
+                // console.log('from angular am '+selectedHoursAM+' type of '+typeof(selectedHoursAM))
+                // console.log('from database am '+am+' type of '+typeof(am))
+                console.log(x+' length of '+x.length+' type of '+typeof(x))
                 if(JSON.stringify(selectedHoursAM) == JSON.stringify(am))
                 checkAm= true;
             })

@@ -15,12 +15,7 @@ export class AdminSrviceService {
   private authStatusListener = new Subject<boolean>();
  
   constructor(private http: HttpClient, private router: Router) { }
-  deleteBooking(bookingId){
-    return this.http.get('http://localhost:3000/bookings/deleteBooking/'+bookingId)
-  }
-  getBookings(){
-    return this.http.get('http://localhost:3000/bookings/listbooking')
-  }
+  
   getToken() {
     return this.token;
   }
