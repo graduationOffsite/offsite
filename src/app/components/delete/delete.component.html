@@ -27,10 +27,10 @@
                         <p><strong>Booker Phone :</strong>  {{booking.playerId.phone}}</p>
                         <span><strong>Booking time :</strong>
                             <ul>
-                                <li *ngFor='let hour of booking.bookingHours.am'>
+                                <li *ngFor='let hour of booking.bookingAmHours'>
                                     {{hour}} AM
                                 </li>
-                                <li *ngFor='let hour of booking.bookingHours.pm'>
+                                <li *ngFor='let hour of booking.bookingPmHours'>
                                     {{hour}} PM
                                 </li>
                             </ul>
@@ -51,8 +51,7 @@
         </div>
     </div>
 </div>
- 
- -->
+ <!-- 
 
 
  <div class="col-sm-12 col-lg-6 pb-3 pl-4" *ngFor="let playground of playgrounds; let i = index">
@@ -81,3 +80,4 @@
             </div>
 </div>
  
+ -->
