@@ -45,6 +45,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { PlayerService } from './components/services/player/player.service';
 import { ErrorComponent } from './components/error/error.component';
 import { ErrorInterceptor } from './error-interceptor';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { ErrorInterceptor } from './error-interceptor';
     MatSelectModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSortModule
+    MatSortModule,
+    Ng2SearchPipeModule
     
   ],
   providers: [

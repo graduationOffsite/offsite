@@ -28,7 +28,8 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
     .subscribe((playgroundsData: {playgrounds:Playground[],playgroundCount: number}) => {
       this.playgrounds =playgroundsData.playgrounds
       this.totalPlaygrounds=playgroundsData.playgroundCount;
-  
+
+
     }) 
   }
 

@@ -1,12 +1,14 @@
-/* body{
-  background: url('../../../assets/images/login.jpg') no-repeat ;
+.container-fluid{
+  background: url('../../../assets/images/admin2.jpg') no-repeat ;
   background-size: cover;
   background-position: center center;
   width: 100%;
   height: 800px;
   position: relative;
-  /* top: 30px; */
-   
+  color: black;
+  font-size: x-large;
+}
+
 
 
 main {

@@ -257,5 +257,12 @@ router.post("/avetest",(req, res, next)=>{
 
  })
         
+ router.post('updateBookin',(req,res,next)=>{
+   /*
+Bookings.findOneAndUpdate({"_id": "12"}, {$set: {"statusOfPayment": "http"}},  function(err,doc) {
+  if (err) { throw err; }*/
+   { console.log("Updated"); }
+//});  
+ });
 
 module.exports = router;
