@@ -37,10 +37,15 @@
                         <form action="#">
                             <!-- Form Group -->
                             <div class="form-group">
-                                <label for="select1">Day</label>
-                                 
+                                <!-- <label for="select1">Day</label>  
                                 <input class="form-control" type="date" required>
-                                 
+                                  -->
+                                  <mat-form-field>
+                                    <mat-label>Choose a date</mat-label>
+                                    <input matInput [matDatepicker]="picker" (dateChange)="valueChanged($event)">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field> 
                             </div>
  
                             <!-- Form Group -->
@@ -48,7 +53,7 @@
                                 <mat-form-field>
                                     <label for="select3">AM Reservation</label>
                                     <mat-select  [(value)]="userSelectedAmHours" multiple>
-                                      <mat-option *ngFor="let hour of playground.amHours" [value]="hour">{{hour}}</mat-option>
+                                      <mat-option *ngFor="let hour of avalAm" [value]="hour">{{hour}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -58,7 +63,7 @@
                                 <mat-form-field>
                                     <label for="select3">PM Reservation</label>
                                     <mat-select  [(value)]="userSelectedPmHours" multiple>
-                                      <mat-option *ngFor="let hour of playground.pmHours" [value]="hour">{{hour}}</mat-option>
+                                      <mat-option *ngFor="let hour of avalPm" [value]="hour">{{hour}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>

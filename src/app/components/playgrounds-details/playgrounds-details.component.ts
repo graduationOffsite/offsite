@@ -2,6 +2,7 @@ import { Component, OnInit,  } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Playground } from '../playground.model';
 import { PlaygroundsService } from '../services/playgrounds.service'
+import * as moment from 'moment'
 
 
 
@@ -15,6 +16,8 @@ export class PlaygroundsDetailsComponent implements OnInit {
   code;
   userSelectedAmHours;
   userSelectedPmHours;
+  avalAm=[];
+  avalPm=[];
   isLoading=false;
 
 
@@ -29,11 +32,27 @@ export class PlaygroundsDetailsComponent implements OnInit {
      });
 
      this.playgroundServ.getDetails(this.code).subscribe(data=>{
-      this.isLoading=false;
-      this.playground=data 
-      // console.log(this.playground);
-      // console.log(typeof(this.playground))
+      this.isLoading=false; 
+      this.playground=data ;
+
     })
+  }
+
+  valueChanged(event){
+    this.isLoading=true;
+     const momentDate=new Date(event.value)
+     const formated=moment(momentDate).format('YYYY-MM-DD')
+     console.log(formated)
+    this.playgroundServ.getAvaliableHours(this.code,formated).subscribe(data=>{
+      this.isLoading=false; 
+      this.avalAm=data.avalAm;
+      this.avalPm=data.avalPm; 
+      console.log(this.avalPm);
+      console.log(this.avalAm); 
+      console.log(typeof(this.avalPm))
+ 
+    })
+
   }
 
 }

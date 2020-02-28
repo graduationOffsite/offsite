@@ -1,6 +1,6 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
-
+const mongoose = require("mongoose"); 
+const jwt = require("jsonwebtoken"); 
 const Player = require("../models/player");
 const Bookings = require("../models/booking");
 const Playground = require("../models/playground");
@@ -63,29 +63,29 @@ router.post('/book', ( req, res) => {
                     if(!selectedHoursPM){
                         res.status(501).json({msg: 'Please select an hour at least'}) ;
                     }else{
-                        new_booking.bookingHours.pm=selectedHoursPM
-                        numberOfHoursSelected=new_booking.bookingHours.pm.length
+                        new_booking.bookingPmHours=selectedHoursPM
+                        numberOfHoursSelected=new_booking.bookingPmHours.length
                         // console.log(numberOfHoursSelected);
                         new_booking.totalPrice*=numberOfHoursSelected
                     }
                 }
                 else if(selectedHoursAM && selectedHoursPM){
-                    new_booking.bookingHours.am=selectedHoursAM
-                    new_booking.bookingHours.pm=selectedHoursPM
-                    numberOfHoursSelected=new_booking.bookingHours.pm.length + new_booking.bookingHours.am.length
+                    new_booking.bookingAmHours=selectedHoursAM
+                    new_booking.bookingPmHours=selectedHoursPM
+                    numberOfHoursSelected=new_booking.bookingPmHours.length + new_booking.bookingAmHours.length
                     // console.log('asd'+selectedHoursAM);
-                    // console.log(new_booking.bookingHours.am+"asakk");
+                    // console.log(new_booking.bookingAmHours+"asakk");
                     
                     new_booking.totalPrice*=numberOfHoursSelected
 
                 }
                 else{
-                    new_booking.bookingHours.am=selectedHoursAM
-                    numberOfHoursSelected=new_booking.bookingHours.am.length
+                    new_booking.bookingAmHours=selectedHoursAM
+                    numberOfHoursSelected=new_booking.bookingAmHours.length
                     // console.log(numberOfHoursSelected);
                     new_booking.totalPrice*=numberOfHoursSelected
                 }
-                // console.log(new_booking.bookingHours.am)
+                // console.log(new_booking.bookingAmHours)
                 new_booking.save().then( booking=> {
                     res.status(201).json(booking);
                     // console.log(booking)
@@ -150,5 +150,77 @@ router.get('/deleteBooking/:id', ( req, res) => {
         })
       })
 })
+
+
+router.get('/check',( req, res) => { 
+    const date=req.query.date
+    const playgroundId=req.query.playgroundId;
+    console.log(date) 
+    console.log(typeof(req.query.date))   
+    console.log(playgroundId)
+
+    id=mongoose.Types.ObjectId(playgroundId)
+    var playgroundAm=[];
+    const playgroundPm=[];
+    const bookingAm=[]; 
+    const bookingPm=[]; 
+    let pmRes=[];
+    let amRes=[]; 
+    var newarr=[];
+    var newarr2=[];
+    var newarr3=[];
+    var newarr4=[]; 
+    var pp=[];  
+    Bookings.find({bookingDate:date,playgroundId: playgroundId}).then(bookinData=>{
+     
+        bookinData.map(b=>{
+          bookingAm.push(b.bookingAmHours);
+          bookingPm.push(b.bookingPmHours); 
+        }) 
+        console.log('bookingAm is '+bookingAm)
+        console.log('bookingBm is '+bookingPm) 
+         console.log('/////////////////////')    
+        newarr=Array.prototype.concat.apply([],bookingAm)
+        newarr3=Array.prototype.concat.apply([],bookingPm)
+        console.log('newarr is '+newarr)
+        console.log('newarr3 is '+newarr3)
+        console.log('/////////////////////')
+
+        Playground.find({_id: id}).then(playground=>{
+            playground.map(fixesHours=>{
+              playgroundAm.push(fixesHours.amHours);
+              playgroundPm.push(fixesHours.pmHours);
+              console.log('playgroundAm is '+playgroundAm)
+              console.log('playgroundPm is '+playgroundPm) 
+           console.log('/////////////////////')
+
+        newarr2=Array.prototype.concat.apply([],playgroundAm)
+        newarr4=Array.prototype.concat.apply([],playgroundPm)
+        console.log('newarr2 is '+newarr2)
+        console.log('newarr4 is '+newarr4)
+        console.log('/////////////////////')
+
+
+             amRes=newarr2.filter(x=>!newarr.includes(x));
+             pmRes=newarr4.filter(x=>!newarr3.includes(x));  
+
+           console.log('amRes is '+amRes)
+           console.log('pmRes is '+pmRes) 
+           
+           res.json({
+               avalAm:amRes,
+               avalPm:pmRes
+
+              });
+            }) 
+        })
+ 
+    })
+  
+ })
+
+
+
+
 
 module.exports = router;

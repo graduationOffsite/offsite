@@ -13,7 +13,10 @@ import {
   MatSelectModule,
   MatPaginatorModule,
   MatDialogModule,
-  MatSortModule
+  MatSortModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+   
 
 } from "@angular/material";
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -86,7 +89,9 @@ import { ErrorInterceptor } from './error-interceptor';
     MatSelectModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     
   ],
   providers: [
