@@ -1,105 +1,120 @@
-<div class="container-fluid">
+ <div class="container-fluid">
     <div class="">
-    <div class="">
-        <div class="row upper">
-            <div class="col-6-lg col-md-12 col-sm-12 justify-content-center">
-                <h1 class="upper_content mt-5 text-center text-wrap d-sm-none d-md-inline">football <br> playgrounds</h1>
-            </div>
-            <div class="col-6-lg col-md-12 col-sm-12">
-                <img src="../../../assets/images/ball.png" class="img-responsive">
-            </div>
-        
-        </div>
-        <section>
-            <div class="content justify-content-center">
-                <h2 class="text-wrap text-center">FIND YOUR Playground</h2>
-                <h5>
-                    Find football pitches in a range of cities across Egypt
-                    Choose a city to get started
-                </h5>
-            </div>
-        </section>
-        <div class="container mx-auto">
-        <div class="row mt-5 justify-content-center">
-            <div class="col-lg-3 col-sm-12"> <i class="text-success fas fa-search"></i>
-                <select class="p-1 mb-3 text-dark ml-3 border border-success rounded">
-                    <option class="bg-success ">select a loaction <i class="fas fa-map-marker-alt"></i></option>
-                    <option class="bg-success ">location 1</option>
-                    <option class="bg-success ">location 2</option>
-                    <option class="bg-success ">location 3</option>
-                </select>
-            </div>
-            <div class="col-lg-3 col-sm-12">
-                <button type="button" class="mb-4 float-lg-left mt-sm-3 mt-lg-n1 btn btn-outline-success" data-toggle="collapse" data-target="#filters">Advanced search <i class="fas fa-stream"></i></button>
+        <div class="">
+            <div class="row upper">
+                <div class="col-6-lg col-md-12 col-sm-12 justify-content-center">
+                    <h1 class="upper_content mt-5 text-center text-wrap d-sm-none d-md-inline">football <br> playgrounds
+                    </h1>
                 </div>
-        </div>
-        <div class="row justify-content-center collapse" id="filters">
-            <div class="col-lg-3 col-sm-12 mt-1"><i class="text-success fas fa-calendar-alt"></i>
-                    <input class=" ml-3 border border-success rounded col-lg-8 col-sm-4" type="date" value="2020-08-19" id="date-input">
-            </div>
-            <div class="col-lg-5 col-sm-12 mt-1">
-                <i class="fas fa-pound-sign text-success"> /hr</i>
-                <div class="form-check-inline ml-3">
-                    <label class="">
-                      <input type="checkbox" class="form-check-input" value="">50+ 
-                    </label>
+                <div class="col-6-lg col-md-12 col-sm-12">
+                    <img src="../../../assets/images/ball.png" class="img-responsive">
                 </div>
-                <div class="form-check-inline">
-                <label class="">
-                    <input type="checkbox" class="form-check-input" value="">50-100
-                </label>
-                </div>
-                <div class="form-check-inline">
-                <label class="">
-                    <input type="checkbox" class="form-check-input" value="">100-150 
-                </label>
-                <button class="btn btn-primary" (click)="onSort()">sort by price</button>
-                 
 
+            </div>
+            <section>
+                <div class="content justify-content-center">
+                    <h2 class="text-wrap text-center">FIND YOUR Playground</h2>
+                    <h5>
+                        Find football pitches in a range of cities across Egypt
+                        Choose a city to get started
+                    </h5>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-12">
-            <button type="button" class="mb-4 float-lg-left btn btn-outline-success">Search</button>
-            </div>
-        </div>      
-      </div>   		
-    </div>
-    </div>
-    <div class="container mt-4 mx-auto">
-         
-      <div class="row pb-3" 
-       >
-        
-        <div  class="col-sm-12 col-lg-6 pb-3 pl-4" *ngFor="let playground of playgrounds; let i = index">
-            <div class="container">
-                <div class="card p-3">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <img class="card-img" style="height: 100%;" src="{{playground.imagePath}}" alt="Playground image">
-                            <div class="clearfix align-bottom" id="popup"> 
-                                <button class="btn btn-outline-success float-left mt-2" (click)="onSelect(playground)">book online <i class="fas fa-bolt text-warning"></i> </button>
-                            </div>
+            </section>
+            <div class="container mx-auto">
+                <div class="row mt-5 justify-content-center">
+                    <form class="form-inline mx-auto">
+                        <label for="playgorundName"><i class="text-success fas fa-search"></i></label>
+
+                         
+                          
+                    <div>
+                     
+                        
+                        <input type="text" type="search" class="form-control m-2" id="playgorundName"
+                        placeholder="Enter a football playground name" [(ngModel)]="term" name="search">
+                    </div>
+
+                        <button type="button" class="btn btn-outline-success p-1 m-2" data-toggle="collapse"
+                            data-target="#filters">Advanced search <i class="fas fa-stream"></i></button>
+                    </form>
+                        
+                       
+                </div>
+                <div class="row justify-content-center collapse" id="filters">
+                    <div class="col-lg-3 col-sm-12 mt-1"><i class="text-success fas fa-calendar-alt"></i>
+                        <input class=" ml-3 border border-success rounded col-lg-8 col-sm-4" type="date"
+                            value="2020-08-19" id="date-input">
+                    </div>
+                    <div class="col-lg-5 col-sm-12 mt-1">
+                        <i class="fas fa-pound-sign text-success"> /hr</i>
+                        <div class="form-check-inline ml-3">
+                            <label class="">
+                                <input type="checkbox" class="form-check-input" value="">50+
+                            </label>
                         </div>
-                        <div class="col-lg-7 p-4">
-                            <div class="card-body mt-lg-n4">
-                                <h4 class="card-text pb-3"><i class="far fa-flag text-success"></i>{{playground.name}}</h4>
-                                <h5 class="card-text pb-3">{{playground.location}}<i class="fas fa-map-marker-alt float-right"></i></h5>
-                                <h5 class="card-text mt-2" > {{playground.price}}<i class="float-right fas fa-pound-sign"> /hr</i></h5>
-                                <small class="pb-3">21 evening bookings available this week</small>
+                        <div class="form-check-inline">
+                            <label class="">
+                                <input type="checkbox" class="form-check-input" value="">50-100
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="">
+                                <input type="checkbox" class="form-check-input" value="">100-150
+                            </label>
+                            <button class="btn btn-primary" (click)="onSort()">sort by price</button>
 
-                            </div>
+
                         </div>
                     </div>
-                    
-                
+                    <div class="col-lg-3 col-sm-12">
+                        <button type="button" class="mb-4 float-lg-left btn btn-outline-success">Search</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container mt-4 mx-auto">
+
+        <div class="row pb-3">
           
-      </div>
-     
+            <div class="col-sm-12 col-lg-6 pb-3 pl-4" *ngFor="let playground of playgrounds">
+                <div class="container">
+                    <div class="card p-3">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <img class="card-img" style="height: 100%;" src="{{playground.imagePath}}"
+                                    alt="Playground image">
+                                <div class="clearfix align-bottom" id="popup">
+                                    <button class="btn btn-outline-success float-left mt-2"
+                                        (click)="onSelect(playground)">book online <i
+                                            class="fas fa-bolt text-warning"></i> </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 p-4">
+                                <div class="card-body mt-lg-n4">
+                                    <h4 class="card-text pb-3"><i
+                                            class="far fa-flag text-success"></i>{{playground.name}}</h4>
+                                    <h5 class="card-text pb-3">{{playground.location}}<i
+                                            class="fas fa-map-marker-alt float-right"></i></h5>
+                                    <h5 class="card-text mt-2"> {{playground.price}}<i
+                                            class="float-right fas fa-pound-sign"> /hr</i></h5>
+                                    <small class="pb-3">21 evening bookings available this week</small>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
- 
-    </div>
-    <mat-paginator [length]="totalPlaygrounds" [pageSize]="playgroundsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
-         *ngIf="playgrounds.length > 0"></mat-paginator>
+
+</div>
+<mat-paginator [length]="totalPlaygrounds" [pageSize]="playgroundsPerPage" [pageSizeOptions]="pageSizeOptions"
+    (page)="onChangedPage($event)" *ngIf="playgrounds.length > 0"></mat-paginator> 
+
+    

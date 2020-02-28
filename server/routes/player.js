@@ -90,7 +90,7 @@ function verifyToken(req,res,next){
 )}
 
 router.get('/name',verifyToken ,(req,res,next)=>{
-  // console.log(req.query.playerToken);
+  // console.log(req);
   if(req.query.playerToken != null){
   return res.status(200).json(Token.player_name)
   }

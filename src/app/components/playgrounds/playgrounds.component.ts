@@ -28,7 +28,8 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
     .subscribe((playgroundsData: {playgrounds:Playground[],playgroundCount: number}) => {
       this.playgrounds =playgroundsData.playgrounds
       this.totalPlaygrounds=playgroundsData.playgroundCount;
-  
+
+
     }) 
   }
 
@@ -37,7 +38,6 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
     this.playgroundsPerPage = pageData.pageSize;
     this.playgroundServ.getPlaygrounds(this.playgroundsPerPage, this.currentPage, this.sortingOrder);
     this.playgroundSub=this.playgroundServ.getPlaygroundUpdateListener()
-
     .subscribe((playgrounds: {playgrounds:Playground[],playgroundCount: number}) => {
       this.playgrounds =playgrounds.playgrounds
       this.totalPlaygrounds=playgrounds.playgroundCount;
@@ -56,7 +56,6 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
       this.totalPlaygrounds=playgroundsData.playgroundCount;
   
     }) 
-
   }
     
 

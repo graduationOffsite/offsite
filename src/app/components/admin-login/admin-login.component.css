@@ -1,12 +1,14 @@
-/* body{
-  background: url('../../../assets/images/login.jpg') no-repeat ;
+.container-fluid{
+  background: url('../../../assets/images/admin2.jpg') no-repeat ;
   background-size: cover;
   background-position: center center;
   width: 100%;
   height: 800px;
   position: relative;
-  /* top: 30px; */
-   
+  color: black;
+  font-size: x-large;
+}
+
 
 
 main {
@@ -14,6 +16,9 @@ main {
     width: 50%;
     margin: 1rem auto;
     margin-top: 30px;
+  }
+  #l{
+    margin-bottom: 100px;
   }
    
 mat-form-field {

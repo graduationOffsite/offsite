@@ -1,9 +1,9 @@
-/* .container-fluid{
-    background-image: url('./../../../assets/images/playground.jpg');
+ .container-fluid{
+    background-image: url('./../../../assets/images/classic-football.png');
     background-size: cover;
     background-position: center center;
     width: 100%;
-    height: 800px;
+    height: 1000px;
     position: relative;
 }
 button:hover{
@@ -15,25 +15,6 @@ button:hover{
 
 
 
-#Booking{
-    background: url('../../../assets/images/slide1.jpg') no-repeat ;
-    background-size: cover;
-    background-position: center center;
-    width: 100%;
-    height: 800px;
-    position: relative;
-    top:30px;
-
-}
-a{
-    margin-right: 50px;
-    z-index: auto;
- } */
-
- /* :host {
-  display: block;
-  margin-top: 1rem;
-} */
 main {
   margin-top:50px;
   width: 80%;

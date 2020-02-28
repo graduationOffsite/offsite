@@ -115,9 +115,11 @@ section .content h5{
     
     .card #popup{
         transform: translate(80%, -50%);
+        /* 70 */
     }
     .card:hover #popup button{
         font-size:40px;
+        /* 35 */
     }
 }
 @media only screen and (min-width: 768px) {
@@ -127,6 +129,7 @@ section .content h5{
     }
     .card:hover #popup button{
         font-size:55px;
+        /* 45 */
     }
 }
 @media only screen and (min-width: 992px) {
@@ -136,6 +139,7 @@ section .content h5{
     }
     .card:hover #popup button{
         font-size:20px;
+        /* 17 */
     }
 }
 @media only screen and (min-width:1200px) {
@@ -144,7 +148,8 @@ section .content h5{
         transform: translate(40%, -50%);
     }
     .card:hover #popup button{
-        font-size:25px;
+        font-size:25px; 
+        /* 20 */
     }
 }
 /*  @media screen and (max-width:913px){
