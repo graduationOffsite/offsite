@@ -34,15 +34,19 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-12">
                     <div class="book-now-form ">
-                        <form action="#">
+                        <form #bookingModel='ngForm' novalidate (ngSubmit)='test(bookingModel.selectedDate,playground._id,bookingModel.selectedHoursAM,bookingModel.selectedHoursPM)'>
+                            
                             <!-- Form Group -->
                             <div class="form-group">
                                 <!-- <label for="select1">Day</label>  
                                 <input class="form-control" type="date" required>
                                   -->
                                   <mat-form-field>
+                                      
+                                    <label>Choose a date</label>
+                                    
                                     <mat-label>Choose a date</mat-label>
-                                    <input matInput [matDatepicker]="picker" (dateChange)="valueChanged($event)">
+                                    <input matInput [matDatepicker]="picker" [min]="minDate" (dateChange)="valueChanged($event)">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                   </mat-form-field> 
@@ -67,9 +71,39 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-
                             <!-- Button -->
-                            <button type="submit">Book Now</button>
+                             <h1>{{errDiv}}</h1> <button type="submit" data-toggle="modal" data-target="#myModal" >Book Now</button>
+                             <div class="row">
+                                <!-- The Modal -->
+                                <div class="modal fade" id="myModal">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                        <h4 class="modal-title">booking information</h4>
+                                        <button class="close" data-dismiss="modal"> &times;</button>
+                                        </div>
+                                        <!-- Modal body -->
+                                        <div class="modal-body">
+                                        <h3> Booking total price: {{totalPriceOfBooking}}</h3>
+                                        <h3> At: {{bookingModel.selectedDate}}</h3>
+                                            <h3>Hours you selected:
+                                                <ul>
+                                                    <li *ngFor='let hour of bookingModel.selectedHoursAM'>{{hour}} AM</li>
+                                                    <li *ngFor='let hour of bookingModel.selectedHoursPM'>{{hour}} PM</li>
+                                                </ul>
+                                            </h3> 
+                                        </div>
+                                        
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                        <button type="button" style="float:left !important;">I'm sure of this booking lets go</button>
+                                        </div>
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

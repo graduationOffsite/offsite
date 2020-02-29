@@ -8,6 +8,21 @@ const checkAuth=require('../middleware/check');
 const router = express.Router();
 
 
+var Token = ''
+function verifyToken(req,res,next){
+//   console.log(req.query.playerToken);
+  let playerToken=req.query.playerToken
+  jwt.verify(playerToken,'Shhhh',(err , verifytoken)=>{
+    if (err)
+    return res.status(400).json({Msg : 'you are unauthorized'})
+    if (verifytoken){
+        Token = verifytoken;
+      next();
+    }
+    }
+)}
+
+
 router.get('/book/:id',(req,res)=>
 {
 Bookings.findOne({_id:req.params.id}).then((data)=>{
@@ -38,83 +53,7 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
       });
  });
 
-
-
-router.post('/book', ( req, res) => {
-    const {  selectedDate ,selectedHoursAM,selectedHoursPM ,player_Id ,playground_id }= req.body
-    let playgoundPrice_Hour;
-    if(!selectedDate){
-        res.status(501).json({msg: 'Please select a date'}) ;
-    }
-    else{
-        const nubmerOfHoursInPeriod=2
-        let timeNow=new Date()
-        var new_booking= new Bookings({
-        bookingDate:selectedDate,
-        playgroundId:playground_id,
-        playerId:player_Id,
-        reservationDate:timeNow.toLocaleString()
-            })
-        let numberOfHoursSelected;
-        Playground.findOne({_id:playground_id}).then((playground)=>{
-            playgoundPrice_Hour=playground.price
-             new_booking.totalPrice = playgoundPrice_Hour*nubmerOfHoursInPeriod
-                if(!selectedHoursAM){
-                    if(!selectedHoursPM){
-                        res.status(501).json({msg: 'Please select an hour at least'}) ;
-                    }else{
-                        new_booking.bookingPmHours=selectedHoursPM
-                        numberOfHoursSelected=new_booking.bookingPmHours.length
-                        // console.log(numberOfHoursSelected);
-                        new_booking.totalPrice*=numberOfHoursSelected
-                    }
-                }
-                else if(selectedHoursAM && selectedHoursPM){
-                    new_booking.bookingAmHours=selectedHoursAM
-                    new_booking.bookingPmHours=selectedHoursPM
-                    numberOfHoursSelected=new_booking.bookingPmHours.length + new_booking.bookingAmHours.length
-                    // console.log('asd'+selectedHoursAM);
-                    // console.log(new_booking.bookingAmHours+"asakk");
-                    
-                    new_booking.totalPrice*=numberOfHoursSelected
-
-                }
-                else{
-                    new_booking.bookingAmHours=selectedHoursAM
-                    numberOfHoursSelected=new_booking.bookingAmHours.length
-                    // console.log(numberOfHoursSelected);
-                    new_booking.totalPrice*=numberOfHoursSelected
-                }
-                // console.log(new_booking.bookingAmHours)
-                new_booking.save().then( booking=> {
-                    res.status(201).json(booking);
-                    // console.log(booking)
-                        Player.findOne({_id:booking.playerId},(err,player)=>{
-                        // console.log(player);
-                            if(player.cart.bookingIds.length==0){
-                                player.cart.bookingIds=[booking._id]
-                                player.cart.totalPrice=booking.totalPrice
-                                // console.log(player);
-                                Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
-                                }
-                            else{
-                                player.cart.totalPrice+=booking.totalPrice
-                                // console.log(player.cart.bookingIds)
-                                player.cart.bookingIds.push(booking._id)
-                                Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
-                            }
-                            
-                        })
-                }).catch(err=>{
-                    res.status(501).json({
-                        message: 'Sorry , somting went wrong!!'
-                    });
-                })  
-        })
-       
-    }
-})
-
+ 
 router.get('/deleteBooking/:id', ( req, res) => {
     let bookingToBeDeletedId=req.params.id
     // let player_Id=booking.playerId
@@ -221,6 +160,83 @@ router.get('/check',( req, res) => {
 
 
 
+ router.post('/book', ( req, res) => {
+    const {  selectedDate ,selectedHoursAM,selectedHoursPM ,player_Id ,playground_id }= req.body
+    let playgoundPrice_Hour;
+    if(!selectedDate){
+        res.status(501).json({msg: 'Please select a date'}) ;
+    }
+    else{
+        const nubmerOfHoursInPeriod=2
+        let timeNow=new Date()
+        var new_booking= new Bookings({
+        bookingDate:selectedDate,
+        playgroundId:playground_id,
+        playerId:player_Id,
+        reservationDate:timeNow.toLocaleString()
+            })
+        let numberOfHoursSelected;
+        Playground.findOne({_id:playground_id}).then((playground)=>{
+            playgoundPrice_Hour=playground.price
+             new_booking.totalPrice = playgoundPrice_Hour*nubmerOfHoursInPeriod
+                if(!selectedHoursAM){
+                    if(!selectedHoursPM){
+                        res.status(501).json({msg: 'Please select an hour at least'}) ;
+                    }else{
+                        new_booking.bookingPmHours=selectedHoursPM
+                        numberOfHoursSelected=new_booking.bookingPmHours.length
+                        // console.log(numberOfHoursSelected);
+                        new_booking.totalPrice*=numberOfHoursSelected
+                    }
+                }
+                else if(selectedHoursAM && selectedHoursPM){
+                    new_booking.bookingAmHours=selectedHoursAM
+                    new_booking.bookingPmHours=selectedHoursPM
+                    numberOfHoursSelected=new_booking.bookingPmHours.length + new_booking.bookingAmHours.length
+                    // console.log('asd'+selectedHoursAM);
+                    // console.log(new_booking.bookingAmHours+"asakk");
+                    
+                    new_booking.totalPrice*=numberOfHoursSelected
+
+                }
+                else{
+                    new_booking.bookingAmHours=selectedHoursAM
+                    numberOfHoursSelected=new_booking.bookingAmHours.length
+                    // console.log(numberOfHoursSelected);
+                    new_booking.totalPrice*=numberOfHoursSelected
+                }
+                // console.log(new_booking.bookingAmHours)
+                new_booking.save().then( booking=> {
+                    res.status(201).json(booking);
+                    // console.log(booking)
+                        Player.findOne({_id:booking.playerId},(err,player)=>{
+                        // console.log(player);
+                            if(player.cart.bookingIds.length==0){
+                                player.cart.bookingIds=[booking._id]
+                                player.cart.totalPrice=booking.totalPrice
+                                // console.log(player);
+                                Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
+                                }
+                            else{
+                                player.cart.totalPrice+=booking.totalPrice
+                                // console.log(player.cart.bookingIds)
+                                player.cart.bookingIds.push(booking._id)
+                                Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
+                            }
+                            
+                        })
+                }).catch(err=>{
+                    res.status(501).json({
+                        message: 'Sorry , somting went wrong!!'
+                    });
+                })  
+        })
+       
+    }
+})
+
+
+ 
 
 
 module.exports = router;

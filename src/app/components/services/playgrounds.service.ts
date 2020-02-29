@@ -98,7 +98,7 @@ addPlayground(
     .post<{ message: string, playground:Playground }>
     ("http://localhost:3000/playgrounds/postPlay", playgroundData)
     .subscribe(responseData =>{
-      this.router.navigate(["/"]); 
+      this.router.navigate(["/playgrounds"]); 
     })  
   }
 
@@ -145,7 +145,7 @@ addPlayground(
       this.http
       .put("http://localhost:3000/playgrounds/" + id, playgroundData)
       .subscribe(response => {
-        this.router.navigate(["/"]);
+        this.router.navigate(["/edit"]);
       });
        
   }
