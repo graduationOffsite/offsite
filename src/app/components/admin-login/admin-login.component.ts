@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AdminSrviceService } from "../services/admin-srvice.service";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.css']
 })
-export class AdminLoginComponent implements OnInit {
-  // public adminPhone:string='';
-  // public adminPassword:string='';
+export class AdminLoginComponent implements OnInit, OnDestroy {
+  private authStatusSub: Subscription;
   isLoading=false;
 
   constructor(public adminServ :AdminSrviceService) { }
@@ -23,6 +23,15 @@ export class AdminLoginComponent implements OnInit {
   
   }
   ngOnInit() {
+    this.authStatusSub = this.adminServ.getAuthStatusListener().subscribe(
+      authStatus => {
+        this.isLoading = false;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.authStatusSub.unsubscribe();
   }
 
 }
