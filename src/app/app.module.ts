@@ -14,11 +14,9 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatSortModule,
-  MatRadioModule
 
 } from "@angular/material";
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { OwlModule } from 'ngx-owl-carousel'; 
 import { HeaderComponent } from './components/header/header.component';
@@ -92,8 +90,9 @@ import { RemoveplayerbookingComponent } from './components/removeplayerbooking/r
     MatPaginatorModule,
     MatDialogModule,
     MatSortModule,
-    Ng2SearchPipeModule,
-    MatRadioModule
+    MatDatepickerModule,
+    MatNativeDateModule,
+    Ng2SearchPipeModule
     
   ],
   providers: [

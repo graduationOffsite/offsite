@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class PlaygroundsService {
   private playgrounds:Playground[] = [];
   private playgroundsUpdated = new Subject<{playgrounds:Playground[], playgroundCount: number }>();
-  private playgroundsSortUpdated = new Subject<{playgroundsdec:Playground[],playgroundsasc:Playground[], playgroundCount: number }>();
 
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -52,21 +51,27 @@ export class PlaygroundsService {
         playgrounds:[...this.playgrounds],
         playgroundCount:comingplaygrounds.maxPlaygrounds
       });
+      
     });
   }
 
   getPlaygroundUpdateListener() {
     return this.playgroundsUpdated.asObservable();
   }
-  getPlaygroundSortUpdateListener() {
-    return this.playgroundsSortUpdated.asObservable();
-  }
+  
 
   
 
   getDetails(id):Observable<any>{
     return this.http.get<any>('http://localhost:3000/playgrounds/'+id);
   }
+
+  getAvaliableHours(id,selectedDate):Observable<any>{
+    const queryParams = `?playgroundId=${id}&date=${selectedDate}`
+
+    return this.http.get<any>('http://localhost:3000/bookings/check/'+queryParams);
+  }
+  
 
     
 addPlayground(
