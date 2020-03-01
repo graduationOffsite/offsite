@@ -41,7 +41,7 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
     Playground.findOne({ownerId:req.adminData.adminId}).then(playground => {
     //   console.log(playground);
       Bookings.find({playgroundId:playground._id}).populate({path:'playerId',select:'name phone -_id'})
-    .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
+      .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
           console.log(data);
         res.status(200).json(data) ; 
     })

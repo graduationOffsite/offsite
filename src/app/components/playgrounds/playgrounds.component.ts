@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { Playground } from '../playground.model';
 import { PlaygroundsService } from '../services/playgrounds.service'
 import { Router } from '@angular/router';
-
-
+// import { MatRadioChange } from '@angular/material';
+   
 @Component({
   selector: 'app-playgrounds',
   templateUrl: './playgrounds.component.html',
@@ -13,12 +13,23 @@ import { Router } from '@angular/router';
 })
 export class PlaygroundsComponent implements OnInit,OnDestroy {
  playgrounds: Playground[] = [];
+
+//  selectedprice='';
  sortingOrder=1;
  totalPlaygrounds = 0;
  playgroundsPerPage = 2;
  currentPage = 1;
  pageSizeOptions = [1, 2, 5, 10];
  private playgroundSub: Subscription;
+
+//  radioChange($event: MatRadioChange) {
+//   console.log($event.source.name, $event.value);
+
+//   if ($event.source.name === 'radioOpt1') {
+//       // Do whatever you want here
+//   }
+// }
+
 
   constructor(private playgroundServ:PlaygroundsService,private router: Router ) { }
 

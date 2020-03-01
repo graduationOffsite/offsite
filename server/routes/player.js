@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const Bookings = require("../models/booking");
 const Player = require("../models/player");
 const router = express.Router();
   
@@ -98,6 +98,31 @@ router.get('/name',verifyToken ,(req,res,next)=>{
     res.status(200).json('no user login')
   }
 })
+
+
+// router.get('/listplayerbookings',verifyToken,(req,res,next)=>{
+//   const player_Id =Token.playerId
+
+
+//      Bookings.findOne({playerId:player_Id}).then(player=>  {
+    
+           
+//         Player.find({"cart.bookingIds[]":player.cart.bookingIds}).populate({select:' selectedDate selectedHoursAM selectedHoursPM '})
+//         .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
+//             console.log(data);
+//           res.status(200).json(data) ; 
+//       })
+
+
+//             }).catch(error=>{
+//               res.status(500).json({
+//                 message:'Sorry, somthing went wrong!!'
+//               })
+//             });
+//       });
+   
+
+
 
 
 module.exports = router;

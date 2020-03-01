@@ -13,7 +13,8 @@ import {
   MatSelectModule,
   MatPaginatorModule,
   MatDialogModule,
-  MatSortModule
+  MatSortModule,
+  MatRadioModule
 
 } from "@angular/material";
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -46,6 +47,7 @@ import { PlayerService } from './components/services/player/player.service';
 import { ErrorComponent } from './components/error/error.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { RemoveplayerbookingComponent } from './components/removeplayerbooking/removeplayerbooking.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     BookingComponent,
     PagenotfoundComponent,
     ErrorComponent,
+    RemoveplayerbookingComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +92,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatPaginatorModule,
     MatDialogModule,
     MatSortModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatRadioModule
     
   ],
   providers: [

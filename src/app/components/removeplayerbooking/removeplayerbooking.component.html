@@ -1,0 +1,37 @@
+<div class="container " >
+    <div class="row " style="margin-top: 300px;" >
+        <div class="col-lg-4 col-md-4 col-sm-12">
+
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="row" *ngIf='bookings; else noBooking'> 
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-2" *ngFor="let booking of bookings" >
+                   <div class="container alert alert-success fade show " id="mm" style="min-height: 420px;">
+                        <button type="button" class="close" data-dismiss="alert" (click)='deleteBooking(booking._id)'>&times;</button>
+                        <p><strong>Playground Name :</strong> {{booking.playgroundId.name}} </p>
+  
+                        <span><strong>Booking time :</strong>
+                            <ul>
+                                <li *ngFor='let hour of booking.bookingAmHours'>
+                                    {{hour}} AM
+                                </li>
+                                <li *ngFor='let hour of booking.bookingPmHours'>
+                                    {{hour}} PM
+                                </li>
+                            </ul>
+                        </span>
+                        <p><strong>Booking date :</strong> {{booking.bookingDate | date:'short'}}</p>
+    
+                    </div>
+                </div>
+            </div>
+            <ng-template #noBooking>
+                <div class="container alert alert-success">
+                there is no bookings yet for your football playground to delete from
+                </div>
+            </ng-template>
+
+        </div>
+    </div>
+  </div>
+</div>
+ 

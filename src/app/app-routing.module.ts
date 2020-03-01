@@ -17,6 +17,8 @@ import { BookingComponent } from './components/booking/booking.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTimeComponent } from './components/add-time/add-time.component';
+import { RemoveplayerbookingComponent } from './components/removeplayerbooking/removeplayerbooking.component';
+import { PlayerAuthenticationGuard } from './components/services/auth/player-authentication.guard';
 
 
 const routes: Routes = [
@@ -36,6 +38,7 @@ const routes: Routes = [
   {path:'edit/:playgroundId',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
   {path:'addTime',component:AddTimeComponent, canActivate:[AuthGuard] },
   {path:'createPlayground',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
+  {path:'remove',component:RemoveplayerbookingComponent,canActivate:[PlayerAuthenticationGuard]},
   {path:'**',component:PagenotfoundComponent}
   
 ];
@@ -43,7 +46,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers:[AuthGuard]
+  providers:[AuthGuard,PlayerAuthenticationGuard]
 })
 export class AppRoutingModule { }
  
