@@ -14,6 +14,8 @@ import {
   MatPaginatorModule,
   MatDialogModule,
   MatSortModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
 
 } from "@angular/material";
 import {ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -46,6 +48,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { RemoveplayerbookingComponent } from './components/removeplayerbooking/removeplayerbooking.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
