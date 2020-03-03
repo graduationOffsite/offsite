@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,8 +26,6 @@ import { BodyComponent } from './components/body/body.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { PlaygroundsComponent } from './components/playgrounds/playgrounds.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import { PlaygroundsDetailsComponent } from './components/playgrounds-details/playgrounds-details.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { PlayerLoginComponent } from './components/player-login/player-login.component';
@@ -38,7 +36,6 @@ import {PlayerTokenInterceptorService} from '../app/components/services/auth/int
 import { PlaygroundCreateComponent } from './components/playground-create/playground-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { AddTimeComponent } from './components/add-time/add-time.component';
 import { EditComponent } from './components/edit/edit.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { BookingComponent } from './components/booking/booking.component';
@@ -58,8 +55,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     FooterComponent,
     HomeComponent,
     PlaygroundsComponent,
-    LoginComponent,
-    RegisterComponent,
     PlaygroundsDetailsComponent,
     AdminLoginComponent,
     PlayerLoginComponent,
@@ -67,7 +62,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AdminRegisterComponent,
     PlaygroundCreateComponent,
     AdminDashboardComponent,
-    AddTimeComponent,
     EditComponent,
     DeleteComponent,
     BookingComponent,
@@ -102,7 +96,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: PlayerTokenInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    PlayerService
+    PlayerService, Title
   ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent]

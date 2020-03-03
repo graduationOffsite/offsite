@@ -15,10 +15,13 @@ export class BookingsService {
       params : new HttpParams().append('playerToken',localStorage.getItem('playerToken'))
       });
   }
-  deleteBooking(bookingId){
+  public deleteBooking(bookingId){
     return this.http.get('http://localhost:3000/bookings/deleteBooking/'+bookingId)
   }
-  getBookings(){
+  public getBookings(){
     return this.http.get('http://localhost:3000/bookings/listbooking')
+  }
+  public getBookingsNum(playgrundId){
+    return this.http.get('http://localhost:3000/bookings/badge/'+playgrundId)
   }
 }

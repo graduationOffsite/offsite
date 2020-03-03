@@ -56,7 +56,7 @@ export class AdminSrviceService {
          adminData
          )
       .subscribe(response => {
-        const token = response.token; 
+        const token = response.token;
         this.token = token;
         console.log(token)
         if(token){

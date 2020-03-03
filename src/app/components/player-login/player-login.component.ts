@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../services/player/player.service';
 import { playerLogin } from '../services/player/playerLogin.model';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-player-login',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class PlayerLoginComponent implements OnInit {
 
-  constructor(private playerService: PlayerService,private route:Router) { }
+  constructor(private playerService: PlayerService,private route:Router,private titleService: Title) { }
   public isRegistered=false;
   public Div;
   public authDiv;
@@ -19,11 +20,11 @@ export class PlayerLoginComponent implements OnInit {
   public isErrAuth=false
   public playerModel=new playerLogin('','')
   ngOnInit() {
-    
+    this.titleService.setTitle( 'Login for player' );
     if (this.playerService.registered){
       console.log("asd")
       this.isRegistered = true
-    this.Div= "Registerd Successfully, Login to Continue"
+    this.Div= "Registerd Successfully, Please login to Continue"
     }
     if (this.playerService.authorized){
       this.isErrAuth = true

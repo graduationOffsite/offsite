@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
 import { PlaygroundsComponent } from './components/playgrounds/playgrounds.component';
-import { RegisterComponent } from './components/register/register.component';
 import { PlaygroundsDetailsComponent } from './components/playgrounds-details/playgrounds-details.component';
 import { PlayerRegisterComponent } from "src/app/components/player-register/player-register.component";
 import { AdminRegisterComponent } from "src/app/components/admin-register/admin-register.component";
@@ -16,7 +14,6 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { BookingComponent } from './components/booking/booking.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { EditComponent } from './components/edit/edit.component';
-import { AddTimeComponent } from './components/add-time/add-time.component';
 import { RemoveplayerbookingComponent } from './components/removeplayerbooking/removeplayerbooking.component';
 import { PlayerAuthenticationGuard } from './components/services/auth/player-authentication.guard';
 
@@ -24,8 +21,6 @@ import { PlayerAuthenticationGuard } from './components/services/auth/player-aut
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'playgrounds',component:PlaygroundsComponent},
-  {path:'login',component:LoginComponent},
-  {path:'register',component:RegisterComponent},
   {path:'playgroundsDetails/:id',component:PlaygroundsDetailsComponent} , 
   {path:'adminDashboard',component:AdminDashboardComponent, canActivate:[AuthGuard] } ,
   {path:'player-register',component:PlayerRegisterComponent},
@@ -36,7 +31,6 @@ const routes: Routes = [
   {path:'delete',component:DeleteComponent, canActivate:[AuthGuard] },
   {path:'edit',component:EditComponent, canActivate:[AuthGuard]},
   {path:'edit/:playgroundId',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
-  {path:'addTime',component:AddTimeComponent, canActivate:[AuthGuard] },
   {path:'createPlayground',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
   {path:'remove',component:RemoveplayerbookingComponent,canActivate:[PlayerAuthenticationGuard]},
   {path:'**',component:PagenotfoundComponent}

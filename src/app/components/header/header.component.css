@@ -8,12 +8,8 @@
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
-  padding: 25px;
 }
 
-nav{
-  /* position: relative; */
-}
 
 .nav-link:nth-child(1){
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
