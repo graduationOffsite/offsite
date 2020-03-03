@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminSrviceService } from '../services/admin-srvice.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit',
@@ -10,7 +11,7 @@ export class EditComponent implements OnInit {
   playground;
   isLoading = false;
 
-  constructor(private authService:AdminSrviceService) { }
+  constructor(private authService:AdminSrviceService,private titleService: Title) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -19,6 +20,7 @@ export class EditComponent implements OnInit {
     this.playground=data 
     console.log(this.playground);
    console.log(typeof(this.playground))
+   this.titleService.setTitle( 'Edting the Playground' );
 })
     
   }

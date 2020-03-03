@@ -11,11 +11,11 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
-.upper:hover{
+/* .upper:hover{
     background-position: left center;
     transition: 40s ease;
     transition-property: background-position;
-}
+} */
 .upper img{
     width:40%; height:400px;
     transform: rotateY(180deg);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AdminSrviceService } from "../services/admin-srvice.service";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-login',
@@ -12,7 +13,7 @@ export class AdminLoginComponent implements OnInit {
   // public adminPassword:string='';
   isLoading=false;
 
-  constructor(public adminServ :AdminSrviceService) { }
+  constructor(public adminServ :AdminSrviceService,private titleService: Title) { }
   onAdminLogin(form:NgForm){
     if (form.invalid) {
       return;
@@ -23,6 +24,7 @@ export class AdminLoginComponent implements OnInit {
   
   }
   ngOnInit() {
+    this.titleService.setTitle( 'Login for football playground owners' );
   }
 
 }

@@ -81,7 +81,7 @@ function verifyToken(req,res,next){
   let playerToken=req.query.playerToken
   jwt.verify(playerToken,'Shhhh',(err , verifytoken)=>{
     if (err)
-    return res.status(400).json({message : 'you are unauthorized'})
+    return res.status(400).json({message : 'You have to login first ... You are unauthorized'})
     if (verifytoken){
         Token = verifytoken;
       next();
