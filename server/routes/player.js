@@ -64,7 +64,7 @@ router.post("/login", (req, res, next) => {
           return res.status(401).json({message: "password doesn't match"});
         }
 
-          let playerToken = jwt.sign({player_name : fetchedPlayer.name ,playerId: fetchedPlayer._id} ,'Shhhh',{expiresIn:'1h'})
+          let playerToken = jwt.sign({player_name : fetchedPlayer.name ,playerId: fetchedPlayer._id} ,'Shhhh',{expiresIn:'24h'})
           // console.log(fetchedUser);
           res.status(200).json(playerToken);
         }).catch(err => {
@@ -81,7 +81,7 @@ function verifyToken(req,res,next){
   let playerToken=req.query.playerToken
   jwt.verify(playerToken,'Shhhh',(err , verifytoken)=>{
     if (err)
-    return res.status(400).json({message : 'you are unauthorized'})
+    return res.status(400).json({message : 'You have to login first ... You are unauthorized'})
     if (verifytoken){
         Token = verifytoken;
       next();
