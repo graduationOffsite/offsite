@@ -21,7 +21,7 @@
     </div>
 
     <div class="col-lg-8 col-sm-12" style="margin-top:100px;">
-
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
       <main>
         <mat-spinner *ngIf="isLoading"></mat-spinner>
         <mat-accordion  *ngIf="!isLoading">
@@ -30,34 +30,33 @@
                 <label for="name">Playground Name : </label>
               {{ playground.name }}
             </mat-expansion-panel-header>
-            <div class="playground-image">
+            <div class="playground-image mb-3">
               <img [src]="playground.imagePath" [alt]="playground.name">
             </div>
-            <mat-expansion-panel-header>
-            <label for="description">Playground Description : </label> 
-            <p>{{ playground.description }}</p>   
-            </mat-expansion-panel-header>
+            <div>
+             <label for="description">Playground Description : </label> 
+             <p>{{ playground.description }}</p>   
+            </div>
     
-            <mat-expansion-panel-header>
+            <div>
                 <label for="owner">Playground Owner : </label>
                 <p>{{ playground.owner }}</p> 
-            </mat-expansion-panel-header>
+            </div>
     
-            <mat-expansion-panel-header>
+            <div>
                 <label for="price">Playground Price : </label>
                 <p>{{ playground.price }}</p> 
-            </mat-expansion-panel-header>
+            </div>
     
-            <mat-expansion-panel-header>
+            <div>
                 <label for="phone">Playground Phone : </label>
                 <p>{{ playground.phone }}</p> 
-            </mat-expansion-panel-header>
+            </div>
     
-            <mat-expansion-panel-header>
+            <div>
                 <label for="location">Playground Location : </label>
                 <p>{{ playground.location }}</p> 
-            </mat-expansion-panel-header>
-    
+            </div>
             <mat-action-row>
                 <mat-select
                 name="playgroundAm" 
@@ -77,6 +76,9 @@
               </mat-action-row>
           </mat-expansion-panel>
         </mat-accordion>
+
+        <p class="info-text mat-body-1" *ngIf="!playground && !isLoading">No playground added yet!</p>
+
      </main>
     
 

@@ -41,7 +41,7 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
     Playground.findOne({ownerId:req.adminData.adminId}).then(playground => {
     //   console.log(playground);
       Bookings.find({playgroundId:playground._id}).populate({path:'playerId',select:'name phone -_id'})
-    .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
+      .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
           console.log(data);
         res.status(200).json(data) ; 
     })
@@ -237,10 +237,6 @@ router.get('/check',verifyToken,( req, res) => {
 
 
  router.get('/badge/:id',( req, res) => {
-
-    // Bookings.find({playgroundId:req.params.id}).then(bookings => {
-    //     res.json(bookings.length)
-    // })
     let monthNow=1+(new Date().getMonth())
     Bookings.find({playgroundId:req.params.id}).then(bookings => {
         var BookingsThisMonth=bookings.filter(booking=>{

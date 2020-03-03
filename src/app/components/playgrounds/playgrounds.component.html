@@ -76,8 +76,8 @@
                 <div class="container">
                     <div class="card p-3">
                         <div class="row">
-                            <div class="col-lg-5" (ngLoad)='geNumOftBooking(playground)'>
-                                <img class="card-img" style="height: 100%;" src="{{playground.imagePath}}"
+                            <div class="col-lg-5">
+                                <img  (mouseover)='geNumOftBooking(playground.id)' class="card-img" style="height: 100%;" src="{{playground.imagePath}}"
                                     alt="Playground image">
                                 <div class="clearfix align-bottom" id="popup">
                                     <button class="btn btn-outline-success float-left mt-2"
@@ -87,8 +87,8 @@
                             </div>
                             <div class="col-lg-7 p-4">
                                 <div class="card-body mt-lg-n4">
-                                    <h4 class="card-text pb-3"><i
-                                            class="far fa-flag text-success"></i>{{playground.name}}</h4>
+                                    <h4 class="card-text pb-3">
+                                        <i class="far fa-flag text-success mr-2"></i>{{playground.name}}</h4>
                                     <h5 class="card-text pb-3">{{playground.location}}<i
                                             class="fas fa-map-marker-alt float-right"></i></h5>
                                     <h5 class="card-text mt-2"> {{playground.price}}<i

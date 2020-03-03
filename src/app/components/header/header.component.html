@@ -45,7 +45,7 @@
       <li class="nav-item dropdown" *ngIf="playerService.authorized && !userIsAuthenticated" >
         <a class="nav-link playerOptions" data-toggle="dropdown" style="color: yellowgreen;">Hi {{playerName}} <h5 class="ml-1 text-dark far fa-user-circle"></h5> </a>
           <div class="dropdown-menu mt-2 text-center">
-            <a class="dropdown-item">My bookings</a>
+            <a class="dropdown-item" routerLink='/remove'>My bookings</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)='playerLogOut()'>Log out</a>
           </div>

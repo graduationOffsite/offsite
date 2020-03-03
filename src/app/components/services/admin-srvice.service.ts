@@ -32,11 +32,12 @@ export class AdminSrviceService {
     console.log(adminData)
     this.http
       .post("http://localhost:3000/admin/adminSignup", adminData)
-      .subscribe(response => {
-        console.log(response);
-      });
-      this.router.navigate(["/admin-login"]);
-
+      .subscribe(() => {
+        this.router.navigate(["/admin-login"]);
+      }, error => {
+        this.authStatusListener.next(false);
+      }); 
+     
   }
 
   showOwnerPlayground():Observable<any>{
@@ -69,6 +70,8 @@ export class AdminSrviceService {
         this.saveAuthData(token, expirationDate);
         this.router.navigate(["/"]);
         }
+      }, error => {
+        this.authStatusListener.next(false);
       });
   }
 

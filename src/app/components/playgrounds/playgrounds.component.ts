@@ -8,6 +8,8 @@ import { BookingsService } from '../services/booking/bookings.service';
 import { Title } from '@angular/platform-browser';
 
 
+// import { MatRadioChange } from '@angular/material';
+   
 @Component({
   selector: 'app-playgrounds',
   templateUrl: './playgrounds.component.html',
@@ -16,6 +18,8 @@ import { Title } from '@angular/platform-browser';
 export class PlaygroundsComponent implements OnInit,OnDestroy {
   title:'football playgrounds'
  playgrounds: Playground[] = [];
+
+//  selectedprice='';
  sortingOrder=1;
  totalPlaygrounds = 0;
  playgroundsPerPage = 2;
@@ -25,7 +29,16 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
   playground_id;
   numberOfbookings: Object;
 
-  constructor(private playgroundServ:PlaygroundsService,private router: Router ,private bookingService:BookingsService,private titleService: Title ) { }
+//  radioChange($event: MatRadioChange) {
+//   console.log($event.source.name, $event.value);
+
+//   if ($event.source.name === 'radioOpt1') {
+//       // Do whatever you want here
+//   }
+// }
+
+
+  constructor(private playgroundServ:PlaygroundsService,private router: Router,private bookingService:BookingsService,private titleService: Title  ) { }
 
   ngOnInit() {
     this.playgroundServ.getPlaygrounds(this.playgroundsPerPage, this.currentPage, this.sortingOrder);
@@ -41,7 +54,7 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
     console.log(playground_id)
     this.bookingService.getBookingsNum(playground_id).subscribe(numberOfbookings=>{
       this.numberOfbookings=numberOfbookings
-      // console.log(this.numberOfbookings)
+      console.log(this.numberOfbookings)
     })
   } */
   onChangedPage(pageData: PageEvent) { 
