@@ -17,6 +17,7 @@ html {
     min-height: 100%;
     font-family: 'Ubuntu', cursive;
     /* // This 👇 is to offset for the footer height */
-    padding-bottom: 15rem;
+    padding-bottom:100px
+   
   }
 
