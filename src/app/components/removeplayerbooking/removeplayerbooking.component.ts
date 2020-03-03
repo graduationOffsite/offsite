@@ -19,5 +19,14 @@ bookings;
 
 
   }
+  removebookings(bookingId){
+
+this.playerbook.remove(bookingId).subscribe(b=>{
+
+  console.log(b)
+})
+
+
+  }
 
 }

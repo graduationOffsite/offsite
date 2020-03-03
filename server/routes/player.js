@@ -100,29 +100,50 @@ router.get('/name',verifyToken ,(req,res,next)=>{
 })
 
 
-// router.get('/listplayerbookings',verifyToken,(req,res,next)=>{
-//   const player_Id =Token.playerId
+router.get('/listplayerbookings',verifyToken,(req,res,next)=>{
+  const player_Id =Token.playerId
+// console.log(player_Id)
 
+     Bookings.find({playerId:player_Id}).populate({path:'playgroundId', select:'name -_id'}).then(bookings=>  {
 
-//      Bookings.findOne({playerId:player_Id}).then(player=>  {
-    
-           
-//         Player.find({"cart.bookingIds[]":player.cart.bookingIds}).populate({select:' selectedDate selectedHoursAM selectedHoursPM '})
-//         .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
-//             console.log(data);
-//           res.status(200).json(data) ; 
-//       })
+      //  console.log(bookings);
+    res.json(bookings)
 
-
-//             }).catch(error=>{
-//               res.status(500).json({
-//                 message:'Sorry, somthing went wrong!!'
-//               })
-//             });
-//       });
+            }).catch(error=>{
+              res.status(500).json({
+                message:'Sorry, somthing went wrong!!'
+              })
+            });
+      });
    
 
+router.get('/remove/:id',verifyToken,(req,res,next)=>{
+const player_Id =Token.playerId
 
+  Bookings.findOneAndDelete({_id:req.params.id}).then(booking=>{
+    // console.log(booking)
+    var indexOfBookingIdInCart=-1;
+    Player.findOne({_id:player_Id}).then(player=>{
+      // console.log(player)
+      for (let i=0; i<player.cart.bookingIds.length; i++){
+                if(req.params.id===player.cart.bookingIds[i].toString()){
+                    indexOfBookingIdInCart=i;
+                    console.log("found the booking id in player's cart has booked");
+                    break;
+                }
+      }
+      if(indexOfBookingIdInCart>=0){
+          var bookingDeleted=player.cart.bookingIds[indexOfBookingIdInCart].toString()
+          console.log(bookingDeleted+' delete this booking from player cart of index '+indexOfBookingIdInCart)
+          console.log(player.cart.totalPrice)
+          player.cart.totalPrice-=booking.totalPrice
+          console.log(player.cart.totalPrice)
+          player.cart.bookingIds.pull(bookingDeleted)
+          Player.updateOne({_id : player_Id},{$set:player},err=>{if(err)console.log(err)});
+      }
+    })
+    })
+  })
 
 
 module.exports = router;

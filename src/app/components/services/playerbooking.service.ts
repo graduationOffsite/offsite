@@ -9,9 +9,15 @@ export class PlayerbookingService {
   constructor(private http:HttpClient) { }
 
   getplayerBookings(){
-    return this.http.get('http://localhost:3000/player/listplayerbookings')
+    return this.http.get('http://localhost:3000/player/listplayerbookings',{
+    observe :'body',   
+    params : new HttpParams().append('playerToken',localStorage.getItem('playerToken'))})
+
   }
+remove(id){
+return this.http.get('http://localhost:3000/player/remove/'+id,{
+    observe :'body',   
+    params : new HttpParams().append('playerToken',localStorage.getItem('playerToken'))})
 
-
-
+}
 }
