@@ -23,7 +23,7 @@ export class PlaygroundCreateComponent implements OnInit {
   avaliableList = 
   ['12-02', '02-04', '04-06', '06-08', '08-10', '10-12'];
   locations=['Qena','Cairo','Aswan','Banha','Asyut',
-  'Beni Suef','Alexandria','Gizeh','Luxor','al-Mansura','Sohag','al-Minya','Ismailia','Tanta'];
+  'Beni Suef','Alexandria','Gizeh','Luxor','al-Mansura','Sohag','al-Minya','Ismailia'];
 
   
   constructor(public playgroundServ:PlaygroundsService,public route:ActivatedRoute) { }

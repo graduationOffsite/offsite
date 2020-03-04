@@ -44,6 +44,18 @@ export class AdminSrviceService {
     return this.http.get<any>("http://localhost:3000/playgrounds/ownerPlayground");
   }
 
+  restAdmin(phone: string){
+    console.log(phone)
+    const adminData = { phone: phone}
+    this.http
+    .post(
+      "http://localhost:3000/admin/adminReset",
+      adminData
+       ).subscribe(respond=>{
+         console.log(respond)
+       })
+  }
+
    
 
   

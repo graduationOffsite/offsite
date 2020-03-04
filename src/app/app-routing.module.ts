@@ -17,6 +17,7 @@ import { BookingComponent } from './components/booking/booking.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { EditComponent } from './components/edit/edit.component';
 import { AddTimeComponent } from './components/add-time/add-time.component';
+import {RestPsssComponent } from './components/rest-psss/rest-psss.component'
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path:'edit/:playgroundId',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
   {path:'addTime',component:AddTimeComponent, canActivate:[AuthGuard] },
   {path:'createPlayground',component:PlaygroundCreateComponent, canActivate:[AuthGuard]},
+  {path:'restPass',component:RestPsssComponent},
   {path:'**',component:PagenotfoundComponent}
   
 ];

@@ -49,6 +49,8 @@ import { PlayerService } from './components/services/player/player.service';
 import { ErrorComponent } from './components/error/error.component';
 import { ErrorInterceptor } from './error-interceptor';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AgmCoreModule,MarkerManager,GoogleMapsAPIWrapper } from '@agm/core';
+import { RestPsssComponent } from './components/rest-psss/rest-psss.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     BookingComponent,
     PagenotfoundComponent,
     ErrorComponent,
+    RestPsssComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,14 +97,19 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD6ZHI3CpBR9-FV6o3zDhgvbOIunKtXeZU'
+    })
     
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: PlayerTokenInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    PlayerService
+    PlayerService,
+    MarkerManager,
+    GoogleMapsAPIWrapper
   ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorComponent]

@@ -88,6 +88,7 @@
                                     <button class="btn btn-outline-success float-left mt-2"
                                         (click)="onSelect(playground)">book online <i
                                             class="fas fa-bolt text-warning"></i> </button>
+                                                 
                                 </div>
                             </div>
                             <div class="col-lg-7 p-4">
@@ -98,6 +99,13 @@
                                             class="fas fa-map-marker-alt float-right"></i></h5>
                                     <h5 class="card-text mt-2"> {{playground.price}}<i
                                             class="float-right fas fa-pound-sign"> /hr</i></h5>
+                                            <button type="button" class="btn btn-outline-success float-left mt-2" 
+                                            data-toggle="modal" 
+                                            data-target="#myModal"
+                                            (mouseover)="showMap(playground.location)"
+                                            >
+                                                Show On Map
+                                              </button>          
                                     <small class="pb-3">21 evening bookings available this week</small>
 
                                 </div>
@@ -114,7 +122,38 @@
     </div>
 
 </div>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Modal Heading</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
+            <agm-marker [latitude]="lat" [longitude]="lng" [label]="M"></agm-marker> 
+
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<!-- Modal -->
+ 
+
 <mat-paginator [length]="totalPlaygrounds" [pageSize]="playgroundsPerPage" [pageSizeOptions]="pageSizeOptions"
     (page)="onChangedPage($event)" *ngIf="playgrounds.length > 0"></mat-paginator> 
+ 
+    <!-- <script src="../../../assets/js/location.js"></script>     -->
 
     

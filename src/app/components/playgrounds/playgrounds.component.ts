@@ -4,6 +4,9 @@ import { Subscription } from 'rxjs';
 import { Playground } from '../playground.model';
 import { PlaygroundsService } from '../services/playgrounds.service'
 import { Router } from '@angular/router';
+ 
+ 
+ 
 
 
 @Component({
@@ -18,6 +21,8 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
  playgroundsPerPage = 2;
  currentPage = 1;
  pageSizeOptions = [1, 2, 5, 10];
+ lat: number = 31.205753;
+  lng: number = 29.924526;
  private playgroundSub: Subscription;
 
   constructor(private playgroundServ:PlaygroundsService,private router: Router ) { }
@@ -30,7 +35,7 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
       this.totalPlaygrounds=playgroundsData.playgroundCount;
 
 
-    }) 
+    })  
   }
 
   onChangedPage(pageData: PageEvent) { 
@@ -63,6 +68,18 @@ export class PlaygroundsComponent implements OnInit,OnDestroy {
     this.router.navigate(['/playgroundsDetails',playground.id])
    console.log(playground.id);
 
+
+  }
+
+  showMap(location){
+    console.log(location)
+    this.playgroundServ.getMapLocation(location)
+    .subscribe(locationData=>{
+      console.log(locationData)
+      // console.log(typeof(JSON.parse(locationData.lat)))
+      this.lat=locationData.lat.valueOf();
+      this.lng=locationData.lng.valueOf();
+    })
 
   }
   ngOnDestroy() {

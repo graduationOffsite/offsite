@@ -1,9 +1,26 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const Nexmo = require('nexmo');
 const Admin = require("../models/admin");
 const router = express.Router();
+
+
+const nexmo = new Nexmo({
+  apiKey: '9f54ad6c',
+  apiSecret: 'lD0MB4v6Xfb2hO2C',
+});
+
+
+router.post('/adminReset', (req, res, next) => {
+  const phone= req.body.phone;
+  console.log(phone)
+  const fromSite="Offsite";
+  const text='hello';
+  nexmo.message.sendSms('Nexmo', phone, text);
+  res.json('correct')
+
+})
   
 router.post("/adminSignup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {

@@ -89,6 +89,13 @@ section .content h5{
     transform: translate(50%, -50%);
     -ms-transform: translate(50%, -50%)
 }
+agm-map {
+    height: 260px;
+  }
+ 
+  
+  
+   
 .card:hover #popup{
     opacity: 1;
     transition: .5s ease;

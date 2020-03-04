@@ -71,6 +71,12 @@ export class PlaygroundsService {
 
     return this.http.get<any>('http://localhost:3000/bookings/check/'+queryParams);
   }
+
+  getMapLocation(location):Observable<any>{
+    const queryParams = `?location=${location}`
+
+    return this.http.get<any>('http://localhost:3000/playgrounds/mapCity/'+queryParams);
+  }
   
 
     

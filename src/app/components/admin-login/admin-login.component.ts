@@ -22,6 +22,15 @@ export class AdminLoginComponent implements OnInit, OnDestroy {
     this.adminServ.login(form.value.adminPhone, form.value.adminPassword);
   
   }
+
+  onAdminReset(form:NgForm){
+    if (form.invalid) {
+      return;
+    }
+    console.log(form.value.adminPhone)
+
+    this.adminServ.restAdmin(form.value.adminPhone)
+  }
   ngOnInit() {
     this.authStatusSub = this.adminServ.getAuthStatusListener().subscribe(
       authStatus => {

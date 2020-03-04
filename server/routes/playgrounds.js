@@ -3,6 +3,7 @@ const mongoose=require('mongoose');
 const multer=require('multer');
 const Playground = require("../models/playground");
 const checkAuth=require('../middleware/check');
+const Egycity=require('../models/egycity')
 const router = express.Router();
 
 const MIME_TYPE_MAP = {
@@ -85,7 +86,28 @@ router.get("/getPlaygrounds", (req, res, next)=>{
   });
 
 
-
+  router.get("/mapCity", (req, res, next) => {
+    console.log('yhgfjhgjhygjy')
+    location=req.query.location
+    console.log(location)
+    console.log(typeof(location)) 
+   Egycity.findOne({city:location}).then(locationData => {
+       if (locationData) {
+         console.log(locationData.lat)
+         console.log(locationData.lat.valueOf())
+        console.log(locationData)
+         res.status(200).json(locationData);
+       } else {
+         res.status(404).json({ message: "location not found!" });
+       }
+     })
+     .catch(error=>{
+       res.status(500).json({
+         message:'Fetching Location Failed!!'
+       })
+     });
+   });  
+      
 
 router.get("/:id", (req, res, next) => {
   Playground.findById(req.params.id).then(playground => {
