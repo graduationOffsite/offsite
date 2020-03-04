@@ -15,7 +15,7 @@
     url("../../../assets/fonts/FuturaLT-Book.svg#FuturaLT-Book") format("svg");
   font-weight: normal;
   font-style: normal; }
- 
+  
   * {
     margin: 0;
     padding: 0; }
@@ -27,7 +27,7 @@
       width: 100%;
     }  
 mat-spinner {
-      margin: auto;
+      margin: auto auto;
     }   
   
   h1,

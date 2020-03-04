@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AdminSrviceService } from "../services/admin-srvice.service";
+import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,7 +15,7 @@ isLoading=false;
 
 
 
-  constructor(public adminServ :AdminSrviceService) { }
+  constructor(public adminServ :AdminSrviceService,private titleService: Title) { }
 
   onAdminSignup(form:NgForm){
     if (form.invalid) {
@@ -26,7 +27,8 @@ isLoading=false;
  
   }
 
-  ngOnInit() { 
+  ngOnInit() {
+    this.titleService.setTitle( 'Register as football playground owner' );
     this.authStatusSub = this.adminServ.getAuthStatusListener().subscribe(
       authStatus => {
         this.isLoading = false;

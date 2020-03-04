@@ -4,6 +4,7 @@ import { PlaygroundsService } from '../services/playgrounds.service'
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { mimeType } from '../mime-type.validator'
 import { Playground } from '../playground.model';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class PlaygroundCreateComponent implements OnInit {
   'Beni Suef','Alexandria','Gizeh','Luxor','al-Mansura','Sohag','al-Minya','Ismailia'];
 
   
-  constructor(public playgroundServ:PlaygroundsService,public route:ActivatedRoute) { }
+  constructor(public playgroundServ:PlaygroundsService,public route:ActivatedRoute,private titleService: Title) { }
 //form:NgForm
   onAddPlayground(){
     if(this.form.invalid){
@@ -83,6 +84,7 @@ export class PlaygroundCreateComponent implements OnInit {
 
 
   ngOnInit() { 
+    this.titleService.setTitle( 'Creating your football playground' );
     this.form = new FormGroup({
       playgroundName: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]

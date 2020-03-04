@@ -10,11 +10,11 @@ const router = express.Router();
 
 var Token = ''
 function verifyToken(req,res,next){
-//   console.log(req.query.playerToken);
+ 
   let playerToken=req.query.playerToken
   jwt.verify(playerToken,'Shhhh',(err , verifytoken)=>{
     if (err)
-    return res.status(400).json({Msg : 'you are unauthorized'})
+    return res.status(400).json({message : 'You have to login first ... You are unauthorized'})
     if (verifytoken){
         Token = verifytoken;
       next();
@@ -41,7 +41,7 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
     Playground.findOne({ownerId:req.adminData.adminId}).then(playground => {
     //   console.log(playground);
       Bookings.find({playgroundId:playground._id}).populate({path:'playerId',select:'name phone -_id'})
-    .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
+      .populate({path:'playgroundId', select:'name -_id'}).then((data)=>{
           console.log(data);
         res.status(200).json(data) ; 
     })
@@ -54,7 +54,7 @@ router.get("/listbooking",checkAuth, (req, res, next)=>{
  });
 
  
-router.get('/deleteBooking/:id', ( req, res) => {
+router.get('/deleteBooking/:id',checkAuth, ( req, res) => {
     let bookingToBeDeletedId=req.params.id
     // let player_Id=booking.playerId
     // let playerCart=cart.bookingIds;
@@ -91,14 +91,17 @@ router.get('/deleteBooking/:id', ( req, res) => {
 })
 
 
-router.get('/check',( req, res) => { 
+router.get('/check',verifyToken,( req, res) => { 
     const date=req.query.date
     const playgroundId=req.query.playgroundId;
     console.log(date) 
     console.log(typeof(req.query.date))   
     console.log(playgroundId)
-
-    id=mongoose.Types.ObjectId(playgroundId)
+    if(!date){
+        res.status(501).json({message: 'Please select a date first'});
+    }
+    else{
+        id=mongoose.Types.ObjectId(playgroundId)
     var playgroundAm=[];
     const playgroundPm=[];
     const bookingAm=[]; 
@@ -129,113 +132,115 @@ router.get('/check',( req, res) => {
             playground.map(fixesHours=>{
               playgroundAm.push(fixesHours.amHours);
               playgroundPm.push(fixesHours.pmHours);
-              console.log('playgroundAm is '+playgroundAm)
-              console.log('playgroundPm is '+playgroundPm) 
-           console.log('/////////////////////')
+  
 
         newarr2=Array.prototype.concat.apply([],playgroundAm)
         newarr4=Array.prototype.concat.apply([],playgroundPm)
-        console.log('newarr2 is '+newarr2)
-        console.log('newarr4 is '+newarr4)
-        console.log('/////////////////////')
+ 
 
 
              amRes=newarr2.filter(x=>!newarr.includes(x));
              pmRes=newarr4.filter(x=>!newarr3.includes(x));  
 
-           console.log('amRes is '+amRes)
-           console.log('pmRes is '+pmRes) 
            
-           res.json({
+             res.json({
                avalAm:amRes,
                avalPm:pmRes
+              });  
 
-              });
             }) 
         })
  
     })
+    }
+    
   
  })
 
 
+/*  if(!amRes){
+    res.json({message:'Sorry there is no am hours available'})   
+   }
+   if(!pmRes){
+    res.json({message:'Sorry there is no pm hours available'})
+   }
+   if(!amRes || !pmRes) {
+    res.json({message:'Sorry seems like there is no hour available on this day try anther one'})
+   } */
+   
+ router.post('/book',verifyToken, ( req, res) => {
+    const player_Id =Token.playerId;
+    const {  selectedDate ,selectedHoursAM,selectedHoursPM  ,playgroundId }= req.body
+    let timeNow=new Date()
+    const nubmerOfHoursInPeriod=2
+    var new_booking= new Bookings({
+    reservationDate:timeNow.toLocaleString(),
+    bookingDate:selectedDate,
+    playgroundId:playgroundId,
+    playerId:player_Id,
+    totalPrice:0,
+    bookingPmHours:selectedHoursPM,
+    bookingAmHours:selectedHoursAM
+    })
+    console.log('/////////////'+new_booking)
+    Playground.findOne({_id:playgroundId}).then((playground)=>{
+        playgoundPrice_Hour=playground.price
+         new_booking.totalPrice = playgoundPrice_Hour*nubmerOfHoursInPeriod
+         if(!selectedHoursAM){
+            if(!selectedHoursPM){
+                res.status(501).json({message: 'Please select an hour at least'}) ;
+            }else{
+                numberOfHoursSelected=new_booking.bookingPmHours.length
+                console.log(numberOfHoursSelected);
+                new_booking.totalPrice*=numberOfHoursSelected
+            }
+         }else if(selectedHoursAM && selectedHoursPM){
+            numberOfHoursSelected=new_booking.bookingPmHours.length + new_booking.bookingAmHours.length
+            console.log(numberOfHoursSelected);
+            new_booking.totalPrice*=numberOfHoursSelected
 
- router.post('/book', ( req, res) => {
-    const {  selectedDate ,selectedHoursAM,selectedHoursPM ,player_Id ,playground_id }= req.body
-    let playgoundPrice_Hour;
-    if(!selectedDate){
-        res.status(501).json({msg: 'Please select a date'}) ;
-    }
-    else{
-        const nubmerOfHoursInPeriod=2
-        let timeNow=new Date()
-        var new_booking= new Bookings({
-        bookingDate:selectedDate,
-        playgroundId:playground_id,
-        playerId:player_Id,
-        reservationDate:timeNow.toLocaleString()
-            })
-        let numberOfHoursSelected;
-        Playground.findOne({_id:playground_id}).then((playground)=>{
-            playgoundPrice_Hour=playground.price
-             new_booking.totalPrice = playgoundPrice_Hour*nubmerOfHoursInPeriod
-                if(!selectedHoursAM){
-                    if(!selectedHoursPM){
-                        res.status(501).json({msg: 'Please select an hour at least'}) ;
-                    }else{
-                        new_booking.bookingPmHours=selectedHoursPM
-                        numberOfHoursSelected=new_booking.bookingPmHours.length
-                        // console.log(numberOfHoursSelected);
-                        new_booking.totalPrice*=numberOfHoursSelected
+        }
+        else{
+            numberOfHoursSelected=new_booking.bookingAmHours.length
+            console.log(numberOfHoursSelected);
+            new_booking.totalPrice*=numberOfHoursSelected
+        }
+        new_booking.save().then( booking=> {
+            res.status(201).json(booking);
+            console.log('*********'+booking)
+                Player.findOne({_id:booking.playerId},(err,player)=>{
+                    console.log(player)
+                    if(player.cart.bookingIds.length==0){
+                        player.cart.bookingIds=[booking._id]
+                        player.cart.totalPrice=booking.totalPrice
+                        console.log(player)
+                        Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
+                        }
+                    else{ console.log(player)
+                        player.cart.totalPrice+=booking.totalPrice
+                        player.cart.bookingIds.push(booking._id)
+                        console.log(player)
+                        Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
                     }
-                }
-                else if(selectedHoursAM && selectedHoursPM){
-                    new_booking.bookingAmHours=selectedHoursAM
-                    new_booking.bookingPmHours=selectedHoursPM
-                    numberOfHoursSelected=new_booking.bookingPmHours.length + new_booking.bookingAmHours.length
-                    // console.log('asd'+selectedHoursAM);
-                    // console.log(new_booking.bookingAmHours+"asakk");
                     
-                    new_booking.totalPrice*=numberOfHoursSelected
+                })
+        }).catch(err=>{
+            res.status(501).json({message: 'Sorry , somting went wrong!!'});
+        })  
+    })
+ })
 
-                }
-                else{
-                    new_booking.bookingAmHours=selectedHoursAM
-                    numberOfHoursSelected=new_booking.bookingAmHours.length
-                    // console.log(numberOfHoursSelected);
-                    new_booking.totalPrice*=numberOfHoursSelected
-                }
-                // console.log(new_booking.bookingAmHours)
-                new_booking.save().then( booking=> {
-                    res.status(201).json(booking);
-                    // console.log(booking)
-                        Player.findOne({_id:booking.playerId},(err,player)=>{
-                        // console.log(player);
-                            if(player.cart.bookingIds.length==0){
-                                player.cart.bookingIds=[booking._id]
-                                player.cart.totalPrice=booking.totalPrice
-                                // console.log(player);
-                                Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
-                                }
-                            else{
-                                player.cart.totalPrice+=booking.totalPrice
-                                // console.log(player.cart.bookingIds)
-                                player.cart.bookingIds.push(booking._id)
-                                Player.updateOne({_id : player._id},{$set:player},err=>{if(err)console.log(err)});
-                            }
-                            
-                        })
-                }).catch(err=>{
-                    res.status(501).json({
-                        message: 'Sorry , somting went wrong!!'
-                    });
-                })  
+
+ router.get('/badge/:id',( req, res) => {
+    let monthNow=1+(new Date().getMonth())
+    Bookings.find({playgroundId:req.params.id}).then(bookings => {
+        var BookingsThisMonth=bookings.filter(booking=>{
+            return (booking.reservationDate.includes(monthNow+"/") || booking.reservationDate.includes(monthNow+"-"))
         })
-       
-    }
-})
-
-
+        console.log(monthNow+'...'+BookingsThisMonth.length)
+        res.json(BookingsThisMonth.length)
+    })
+ })
  
 
 

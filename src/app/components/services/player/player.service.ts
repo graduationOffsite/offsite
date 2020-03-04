@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class PlayerService {
 
   constructor(private http:HttpClient, private router: Router) { 
-    
+    this.setTimer()
     console.log(this.authorized)
   }
          
@@ -22,9 +22,6 @@ export class PlayerService {
     return this.http.post('http://localhost:3000/player/signup',player);
   }
   public loginPlayer(player:playerLogin){
-    // if(this.authorized=true){
-    //   this.setTimer()
-    // }
     return this.http.post('http://localhost:3000/player/login',player )
     }
     public auth(){
@@ -34,7 +31,7 @@ export class PlayerService {
     public getPlayerName(){
     return this.http.get('http://localhost:3000/player/name',{
     observe :'body',   
-    params : new HttpParams().append('playerToken',localStorage.getItem('playerToken'))});
+    params : new HttpParams().append('playerToken',localStorage.getItem('playerToken'))})
     }
 
     getToken(){
@@ -50,7 +47,6 @@ export class PlayerService {
       console.log('timer start')
       setTimeout(()=>{
         this.removeToken();
-      },3600*1000)
-    }
-  }
+      },24*60*60*1000)
+  }}
 }

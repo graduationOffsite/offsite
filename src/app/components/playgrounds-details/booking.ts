@@ -1,4 +1,4 @@
-export class test{
+export class Booking{
     constructor(
         public selectedDate:String,
         public selectedHoursAM:Object,

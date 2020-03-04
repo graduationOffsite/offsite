@@ -30,7 +30,7 @@
                 <label for="name">Playground Name : </label>
               {{ playground.name }}
             </mat-expansion-panel-header>
-            <div class="playground-image">
+            <div class="playground-image mb-3">
               <img [src]="playground.imagePath" [alt]="playground.name">
             </div>
             <div>
@@ -57,7 +57,6 @@
                 <label for="location">Playground Location : </label>
                 <p>{{ playground.location }}</p> 
             </div>
-    
             <mat-action-row>
                 <mat-select
                 name="playgroundAm" 
