@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { BookingsService } from '../services/booking/bookings.service';
 
 @Component({
   selector: 'app-booking',
@@ -7,12 +7,17 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./booking.component.css']
 })
 export class BookingComponent implements OnInit {
+  bookings;
 
-  constructor(private titleService: Title) { }
+  constructor(public bookingService :BookingsService) { }
 
   ngOnInit() {
-    
-    this.titleService.setTitle( 'Bookings list' );
+
+    this.bookingService.getBookings().subscribe(bookings=>{
+      console.log(bookings)
+      this.bookings=bookings
+      
+    })
   }
 
 }
